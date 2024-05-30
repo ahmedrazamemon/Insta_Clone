@@ -1,24 +1,28 @@
 import React from "react";
 import { StyleSheet, Text, View ,Image, StatusBar} from "react-native";
-import LoginForm from "../Components/LoginScreen/LoginForm";
-import Logo from '../Assets/Images/logo.png'
+import SignupForm from "../Components/SignupScreen/SignupForm";
+import { ScrollView } from "react-native";
 
-function LoginScreen(){
+function SignupScreen(){
 
+    
 const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/62-instagram-512.png"
 
     return(
         <View style={Styles.container}>
             <StatusBar backgroundColor={"rgb(238 241 249)"} barStyle={"dark-content"}/>
            
+           <ScrollView showsVerticalScrollIndicator={false}>
            <View style={Styles.logoConatiner}>
             <Image source={{uri:InstaLogo}} style={{width:100,height:100}}/>
            </View>
-           <LoginForm/>
+
+           <SignupForm/>
+           </ScrollView>
            </View>
     )
 }
-export default LoginScreen;
+export default SignupScreen;
 
 const Styles= StyleSheet.create({
 

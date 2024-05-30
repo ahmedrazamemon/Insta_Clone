@@ -1,11 +1,13 @@
-import {Formik} from 'formik';
+import {ErrorMessage, Formik} from 'formik';
 import React, {useState} from 'react';
 import {Button, Image, Text, TextInput, View} from 'react-native';
 import {Divider} from 'react-native-elements';
 import * as Yup from 'yup';
 const PostUploadSchema = Yup.object().shape({
   imageUrl: Yup.string().url().required('Url is Required'),
-  caption: Yup.string().max(2200,'Caption has reached charaters limit').required("Caption is required"),
+  caption: Yup.string()
+    .max(2200, 'Caption has reached charaters limit')
+    .required('Caption is required'),
 });
 
 function FormikPostUploader() {
@@ -18,9 +20,8 @@ function FormikPostUploader() {
       initialValues={{imageUrl: '', caption: ''}}
       onSubmit={values => console.log(values)}
       validationSchema={PostUploadSchema}
-      validateOnMount={true}
-      
-      >
+      // validateOnMount={true}
+    >
       {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
         <>
           <View
@@ -30,29 +31,28 @@ function FormikPostUploader() {
               justifyContent: 'space-between',
             }}>
             <Image
-              source={{uri: thumbNailUrl?thumbNailUrl:Img_PlaceHolder}}
+              source={{uri: thumbNailUrl ? thumbNailUrl : Img_PlaceHolder}}
               style={{width: 150, height: 150, resizeMode: 'contain'}}
             />
 
             <View style={{flex: 1, margin: 12}}>
-               <TextInput
-       placeholderTextColor={'gray'}
-       style={{color: 'white', fontSize: 18}}
+              <TextInput
+                placeholderTextColor={'gray'}
+                style={{color: 'white', fontSize: 18}}
                 multiline={true}
                 onChangeText={handleChange('caption')}
                 onBlur={handleBlur('caption')}
                 value={values.caption}
                 placeholder="Write a Caption here.."
               />
-               {errors.caption && (
-            <Text style={{fontSize: 14, color: 'red'}}>{errors.caption}</Text>
-          )}
-         
+              <Text style={{color: 'red', fontWeight: 'lighter'}}>
+                <ErrorMessage name={'caption'} />
+              </Text>
             </View>
           </View>
           <Divider width={0.2} orientation="vertical" />
           <TextInput
-            onChange={e=>setthumbNailUrl(e.nativeEvent.text)}
+            onChange={e => setthumbNailUrl(e.nativeEvent.text)}
             placeholderTextColor={'gray'}
             style={{color: 'white', fontSize: 18}}
             onChangeText={handleChange('imageUrl')}
@@ -60,10 +60,9 @@ function FormikPostUploader() {
             value={values.imageUrl}
             placeholder="Image Url"
           />
-
-          {errors.imageUrl && (
-            <Text style={{fontSize: 14, color: 'red'}}>{errors.imageUrl}</Text>
-          )}
+            <Text style={{color: 'red', fontWeight: 'lighter'}}>
+                <ErrorMessage name={'imageUrl'} />
+              </Text>
           <Button
             onPress={handleSubmit}
             title="share"

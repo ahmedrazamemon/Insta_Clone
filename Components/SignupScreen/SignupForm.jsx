@@ -10,27 +10,43 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 import {ErrorMessage, Formik} from 'formik';
-const LoginFormSchema = Yup.object().shape({
+const SignupFormSchema = Yup.object().shape({
+  username: Yup.string().required("User name is required").min(3, 'User name must have 3 letters'),
   email: Yup.string().email().required('email is required'),
   password: Yup.string()
     .min(6, 'Password Must be 6 characters long')
     .required('Password is required'),
 });
-function LoginForm() {
+function SignupForm() {
   return (
     <Formik
-      initialValues={{email: '', password: ''}}
-      validationSchema={LoginFormSchema}
+      initialValues={{username: '', email: '', password: ''}}
+      validationSchema={SignupFormSchema}
       validateOnMount={true}
       onSubmit={values => console.log(values)}>
       {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
         <>
           <View style={Styles.wrapper}>
+            <View style={Styles.inputFeild}>
+              <TextInput
+                autoCapitalize="none"
+                placeholderTextColor={'#444'}
+                placeholder="User Name"
+                keyboardType="twitter"
+                onBlur={handleBlur('username')}
+                onChangeText={handleChange('username')}
+                value={values.username}
+                //   autoFocus={true}
+              />
+            </View>
+            <Text style={Styles.errormessage}>
+              <ErrorMessage name={'username'} />
+            </Text>
             <View style={[Styles.inputFeild]}>
               <TextInput
                 autoCapitalize="none"
                 placeholderTextColor={'#444'}
-                placeholder="Phone Number,User Name or Email"
+                placeholder="Email"
                 keyboardType="email-address"
                 onBlur={handleBlur('email')}
                 onChangeText={handleChange('email')}
@@ -38,13 +54,7 @@ function LoginForm() {
                 //   autoFocus={true}
               />
             </View>
-            <Text
-              style={{
-                color: 'red',
-                fontSize: 14,
-                marginTop: -10,
-                marginBottom: 10,
-              }}>
+            <Text style={Styles.errormessage}>
               <ErrorMessage name={'email'} />
             </Text>
             <View style={Styles.inputFeild}>
@@ -58,25 +68,16 @@ function LoginForm() {
                 value={values.password}
               />
             </View>
-            <Text
-              style={{
-                color: 'red',
-                fontSize: 14,
-                marginTop: -10,
-                marginBottom: 10,
-              }}>
+            <Text style={Styles.errormessage}>
               <ErrorMessage name={'password'} />
             </Text>
-            <View
+            {/* <View
               style={{alignItems: 'flex-end', marginBottom: 18, marginTop: -6}}>
               <TouchableOpacity>
                 <Text style={{color: '#6BB0F5'}}>Forgot password</Text>
               </TouchableOpacity>
-            </View>
-            <Pressable
-              style={Styles.button}
-              onPress={handleSubmit}
-          >
+            </View> */}
+            <Pressable style={Styles.button} onPress={handleSubmit}>
               <Text style={{color: 'white'}}>Login</Text>
             </Pressable>
           </View>
@@ -85,7 +86,7 @@ function LoginForm() {
     </Formik>
   );
 }
-export default LoginForm;
+export default SignupForm;
 
 const Styles = StyleSheet.create({
   inputFeild: {
@@ -118,5 +119,11 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     // borderWidth:1
+  },
+  errormessage: {
+    color: 'red',
+    fontSize: 14,
+    marginTop: -10,
+    marginBottom: 10,
   },
 });
