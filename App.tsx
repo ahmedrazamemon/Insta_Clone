@@ -11,10 +11,11 @@ export default function App(){
   return(
 
     <SafeAreaView style={style.container}>
-    <StatusBar backgroundColor={"white"}/>
+    {/* <StatusBar backgroundColor={"white"}/> */}
    {/* <HomeScreen/> */}
     {/* <LoginScreen/> */}
-<SignupScreen/> 
+    <AppNavigator/>
+{/* <SignupScreen/>  */}
   {/* <NewPostScreen/> */}
    </SafeAreaView>
   )

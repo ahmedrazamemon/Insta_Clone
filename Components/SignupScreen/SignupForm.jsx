@@ -17,13 +17,13 @@ const SignupFormSchema = Yup.object().shape({
     .min(6, 'Password Must be 6 characters long')
     .required('Password is required'),
 });
-function SignupForm() {
+function SignupForm({navigation}) {
   return (
     <Formik
       initialValues={{username: '', email: '', password: ''}}
       validationSchema={SignupFormSchema}
       validateOnMount={true}
-      onSubmit={values => console.log(values)}>
+      onSubmit={()=>navigation.replace("HomeScreen")}>
       {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
         <>
           <View style={Styles.wrapper}>
@@ -71,15 +71,13 @@ function SignupForm() {
             <Text style={Styles.errormessage}>
               <ErrorMessage name={'password'} />
             </Text>
-            {/* <View
-              style={{alignItems: 'flex-end', marginBottom: 18, marginTop: -6}}>
-              <TouchableOpacity>
-                <Text style={{color: '#6BB0F5'}}>Forgot password</Text>
-              </TouchableOpacity>
-            </View> */}
             <Pressable style={Styles.button} onPress={handleSubmit}>
-              <Text style={{color: 'white'}}>Login</Text>
+              <Text style={{color: 'white'}}>Signup</Text>
             </Pressable>
+            <View style={Styles.LoginContainer}>
+              <Text>Don't have an account?</Text>
+              <Pressable onPress={()=>navigation.replace("LoginScreen")}><Text style={{color:"#6AA0F5"}}> Login</Text></Pressable>
+            </View>
           </View>
         </>
       )}
@@ -104,16 +102,13 @@ const Styles = StyleSheet.create({
     marginTop: 50,
     flex: 2,
   },
-  SignupContainer: {
+  LoginContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    marginBottom: 40,
-    flex: 2,
-    width: 400,
+    marginTop:20
   },
   button: {
-    backgroundColor: '#6BB0F5',
+    backgroundColor: '#6AA0F5',
     minHeight: 43,
     justifyContent: 'center',
     alignItems: 'center',

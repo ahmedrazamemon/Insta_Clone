@@ -6,11 +6,11 @@ import Posts from "../Components/Home/Post";
 import { PostData } from "../data/PostData";
 import BottomTabs, { BottomTabIcons } from "../Components/Home/BottomTabs";
 
-function HomeScreen(){
+function HomeScreen({navigation}){
     return(
         <View style={style.container}>
             <StatusBar backgroundColor={"black"}/>
-            <Header/>
+            <Header navigation={navigation}/>
             <Stories/>
             <ScrollView >
             {PostData.map((post,index)=>(

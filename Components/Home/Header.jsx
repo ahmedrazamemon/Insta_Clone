@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 // import Logo from '../../Assets/Images/logo.png'
 
-function Header() {
+function Header({navigation}) {
   return (
     <>
       <View style={style.container}>

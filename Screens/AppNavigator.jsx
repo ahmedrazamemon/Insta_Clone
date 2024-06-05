@@ -3,19 +3,39 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen';
 import NewPostScreen from './NewPostScreen';
+import LoginScreen from './LoginScreen';
+import SignupScreen from './SignupScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='LoginScreen'>
+        <Stack.Screen 
+          name="LoginScreen"
+          options={{headerShown: false}}
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name="SignupScreen"
+          options={{headerShown: false}}
+          component={SignupScreen}
+        />
         <Stack.Screen
           name="HomeScreen"
           options={{headerShown: false}}
           component={HomeScreen}
         />
+
+<Stack.Screen
+          name="NewPostScreen"
+          options={{headerShown: false}}
+          component={NewPostScreen}
+        />
+
       </Stack.Navigator>
+
     </NavigationContainer>
   );
 };

@@ -16,13 +16,13 @@ const LoginFormSchema = Yup.object().shape({
     .min(6, 'Password Must be 6 characters long')
     .required('Password is required'),
 });
-function LoginForm() {
+function LoginForm({navigation}) {
   return (
     <Formik
       initialValues={{email: '', password: ''}}
       validationSchema={LoginFormSchema}
       validateOnMount={true}
-      onSubmit={values => console.log(values)}>
+      onSubmit={()=>navigation.replace("HomeScreen")}>
       {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
         <>
           <View style={Styles.wrapper}>
@@ -79,6 +79,11 @@ function LoginForm() {
           >
               <Text style={{color: 'white'}}>Login</Text>
             </Pressable>
+
+            <View style={Styles.SignupContainer}>
+              <Text>Don't have an account?</Text>
+              <Pressable onPress={()=>navigation.replace("SignupScreen")}><Text style={{color:"#6AA0F5"}}> Signup</Text></Pressable>
+            </View>
           </View>
         </>
       )}
@@ -112,7 +117,7 @@ const Styles = StyleSheet.create({
     width: 400,
   },
   button: {
-    backgroundColor: '#6BB0F5',
+    backgroundColor: '#6AA0F5',
     minHeight: 43,
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View ,Image, StatusBar} from "react-native";
-import LoginForm from "../Components/LoginScreen/LoginForm";
 import Logo from '../Assets/Images/logo.png'
-
-function LoginScreen(){
+import LoginForm from "../Components/loginScreen/LoginForm";
+function LoginScreen({navigation}){
 
 const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/62-instagram-512.png"
 
@@ -14,7 +13,7 @@ const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/5
            <View style={Styles.logoConatiner}>
             <Image source={{uri:InstaLogo}} style={{width:100,height:100}}/>
            </View>
-           <LoginForm/>
+           <LoginForm navigation={navigation}/>
            </View>
     )
 }
