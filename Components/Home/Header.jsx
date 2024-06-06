@@ -15,7 +15,7 @@ function Header({navigation}) {
           />
         </TouchableOpacity>
         <View style={style.iconcontainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate("NewPostScreen")}>
             <Icon style={style.icon} name="plussquareo" size={30} />
           </TouchableOpacity>
           <TouchableOpacity>
@@ -38,9 +38,10 @@ const style = StyleSheet.create({
   logo: {
     width: 100,
     height: 50,
-    resizeMode: 'contain',
+    resizeMode: 'center',
   },
   container: {
+    marginTop:30,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',

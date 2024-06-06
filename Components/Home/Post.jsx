@@ -52,7 +52,7 @@ const PostImage = ({post}) => {
 };
 
 const FooterIcons = () => {
-  const iconNames = ['heart', 'comment-o', 'share', 'save'];
+  const iconNames = ['heart', 'comment-o', 'share', 'bookmark'];
   return (
     <View style={styles.container}>
       <View style={styles.leftIcons}>

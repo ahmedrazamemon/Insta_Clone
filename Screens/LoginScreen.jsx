@@ -8,7 +8,6 @@ const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/5
 
     return(
         <View style={Styles.container}>
-            <StatusBar backgroundColor={"rgb(238 241 249)"} barStyle={"dark-content"}/>
            
            <View style={Styles.logoConatiner}>
             <Image source={{uri:InstaLogo}} style={{width:100,height:100}}/>

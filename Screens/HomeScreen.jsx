@@ -9,7 +9,6 @@ import BottomTabs, { BottomTabIcons } from "../Components/Home/BottomTabs";
 function HomeScreen({navigation}){
     return(
         <View style={style.container}>
-            <StatusBar backgroundColor={"black"}/>
             <Header navigation={navigation}/>
             <Stories/>
             <ScrollView >

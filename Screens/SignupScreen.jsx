@@ -10,7 +10,7 @@ const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/5
 
     return(
         <View style={Styles.container}>
-            <StatusBar backgroundColor={"rgb(238 241 249)"} barStyle={"dark-content"}/>
+            {/* <StatusBar backgroundColor={"rgb(238 241 249)"} barStyle={"dark-content"}/> */}
            
            <ScrollView showsVerticalScrollIndicator={false}>
            <View style={Styles.logoConatiner}>

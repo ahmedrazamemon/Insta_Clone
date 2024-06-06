@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "703713834554",
+    "project_id": "form-664f9",
+    "storage_bucket": "form-664f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703713834554:android:dc6abf868aae7498292703",
+        "android_client_info": {
+          "package_name": "com.instaclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703713834554-kdhk4piues3skdsrfg5bj9ccavlfo2v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7S99iMG_BSmqhzcQ6VgYLfy5ogKS2xeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703713834554-kdhk4piues3skdsrfg5bj9ccavlfo2v0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
