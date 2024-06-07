@@ -35,7 +35,7 @@ function SignupForm({navigation}) {
 
   // Getting random profile pictures
 
-  const getRandomProfilePicture = async ()=>{
+  const getRandomProfilePicture = async ({navigation})=>{
 
     const respone = await fetch("https://randomuser.me/api")
     const data = await respone.json()

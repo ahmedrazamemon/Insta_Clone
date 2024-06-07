@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
-import AppNavigator from "./Screens/AppNavigator";
 import { AvoidSoftInput } from "react-native-avoid-softinput";
+import AuthNavigation from "./Screens/AuthNavigation";
 
 
 export default function App(){
@@ -20,11 +20,11 @@ export default function App(){
     // rgb(238 241 249)
     <SafeAreaView style={style.container}>
             <StatusBar backgroundColor={"#0000"} barStyle={"light-content"}/>
+            <AuthNavigation/>
             {/* <StatusBar
           barStyle={Platform.OS == 'ios' ? 'dark-content' : 'light-content'}
           backgroundColor={COLORS.primary}
         /> */}
-    <AppNavigator/>
    </SafeAreaView>
   )
   

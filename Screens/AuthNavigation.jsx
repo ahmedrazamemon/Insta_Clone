@@ -1,8 +1,6 @@
 import react, { useEffect, useState } from 'react'
-import { View } from 'react-native';
-import { signInStack,signOutStack } from './AppNavigator';
-import { useGestureHandlerRef } from '@react-navigation/stack';
-import {auth} from 'react-native-firebase/auth'
+import auth from '@react-native-firebase/auth'
+import { SignInStack, SignOutStack } from './AppNavigator';
 
 const AuthNavigation=()=>{
 
@@ -17,7 +15,7 @@ useEffect(()=>{
 
 },[])
 
-return<>{currentUser?<signInStack/>:<signOutStack/>}
+return<>{currentUser?<SignInStack/>:<SignOutStack/>}
 </>
 
 

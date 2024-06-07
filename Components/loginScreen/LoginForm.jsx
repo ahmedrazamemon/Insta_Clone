@@ -25,7 +25,7 @@ import {
 const LoginFormSchema = Yup.object().shape({
   email: Yup.string().email().required('email is required'),
   password: Yup.string()
-  .min(6, 'Password Must be 6 characters long')
+  .min(6, 'Minimum 6 characters')
   .required('Password is required'),
 });
 
@@ -73,6 +73,7 @@ function LoginForm({navigation}) {
         <>
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
+              <Text style={Styles.label}>email</Text>
               <View style={[Styles.inputFeild]}>
                 <TextInput
                   autoCapitalize="none"
@@ -94,7 +95,9 @@ function LoginForm({navigation}) {
                 }}>
                 <ErrorMessage name={'email'} />
               </Text>
+              <Text style={Styles.label}>password</Text>
               <View style={Styles.inputFeild}>
+
                 <TextInput
                   placeholderTextColor={'#444'}
                   placeholder="Password"
@@ -150,6 +153,12 @@ function LoginForm({navigation}) {
 export default LoginForm;
 
 const Styles = StyleSheet.create({
+  label:{
+
+    margin:5
+
+  },
+  
   inputFeild: {
     borderRadius: 4,
     padding: 10,

@@ -61,5 +61,6 @@ const styles = StyleSheet.create({
     margin:"auto",
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginBottom:50
   },
 });

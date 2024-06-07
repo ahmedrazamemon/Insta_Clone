@@ -2,13 +2,22 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
-// import Logo from '../../Assets/Images/logo.png'
-
+import auth from '@react-native-firebase/auth'
 function Header({navigation}) {
+
+  const handleSignOut=async ()=>{
+try{
+
+  await auth().signOut()
+}
+catch(e){
+  console.log(e.code)
+}
+  }
   return (
     <>
       <View style={style.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSignOut}>
           <Image
             style={style.logo}
             source={require('../../Assets/Images/logo.png')}
