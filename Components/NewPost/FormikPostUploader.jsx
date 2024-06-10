@@ -1,8 +1,10 @@
 import {ErrorMessage, Formik} from 'formik';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Image, Text, TextInput, View} from 'react-native';
 import {Divider} from 'react-native-elements';
 import * as Yup from 'yup';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 const PostUploadSchema = Yup.object().shape({
   imageUrl: Yup.string().url().required('Url is Required'),
   caption: Yup.string()
@@ -10,17 +12,65 @@ const PostUploadSchema = Yup.object().shape({
     .required('Caption is required'),
 });
 
-function FormikPostUploader() {
+function FormikPostUploader({navigation}) {
   const Img_PlaceHolder = 'https://s2.ezgif.com/tmp/ezgif-2-4ed149de46.png';
 
   const [thumbNailUrl, setthumbNailUrl] = useState(Img_PlaceHolder);
+  const [currentLoggedInUser, setcurrentLoggedInUser] = useState(null);
 
+  const getUserName = () => {
+    const user = auth().currentUser;
+    const unSubscribe = firestore()
+      .collection('Users')
+      .where('userid', '==', user.uid)
+      .limit(1)
+      .onSnapshot(snapshot => {
+        snapshot.docs.map(doc => {
+          setcurrentLoggedInUser({
+            username: doc.data().username,
+            profilePicture: doc.data().profilePicture, // Corrected spelling
+          });
+        });
+      });
+
+    return unSubscribe;
+  };
+
+  useEffect(() => {
+    const unsubscribe = getUserName();
+    return () => unsubscribe && unsubscribe(); // Clean up subscription on unmount
+  }, []);
+
+  const postUploader = (imgurl, caption) => {
+    const user = auth().currentUser;
+    firestore()
+      .collection('users')
+      .doc(user.email)
+      .collection('posts')
+      .add({
+        imgurl: imgurl,
+        caption: caption,
+        profilePicture: currentLoggedInUser?.profilePicture,
+        userid: user.uid,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        likes: 0,
+        comments: [],
+        likesbyuse: [],
+      })
+      .then(() => {
+        console.log('Data Added');
+        navigation.goBack();
+      })
+      .catch(error => {
+        console.error('Error adding document:', error);
+      });
+  };
   return (
     <Formik
       initialValues={{imageUrl: '', caption: ''}}
-      onSubmit={values => console.log(values)}
+      onSubmit={(values) =>postUploader(values.imageUrl,values.caption)}
       validationSchema={PostUploadSchema}
-      // validateOnMount={true}
+      validateOnMount={true}
     >
       {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
         <>
@@ -45,7 +95,7 @@ function FormikPostUploader() {
                 value={values.caption}
                 placeholder="Write a Caption here.."
               />
-              <Text style={{color: 'red', fontWeight: 'lighter'}}>
+              <Text style={{color: 'red', fontWeight: '300'}}>
                 <ErrorMessage name={'caption'} />
               </Text>
             </View>
@@ -60,9 +110,9 @@ function FormikPostUploader() {
             value={values.imageUrl}
             placeholder="Image Url"
           />
-            <Text style={{color: 'red', fontWeight: 'lighter'}}>
-                <ErrorMessage name={'imageUrl'} />
-              </Text>
+          <Text style={{color: 'red', fontWeight: '400'}}>
+            <ErrorMessage name={'imageUrl'} />
+          </Text>
           <Button
             onPress={handleSubmit}
             title="share"

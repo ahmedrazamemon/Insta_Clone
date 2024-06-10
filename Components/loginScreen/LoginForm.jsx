@@ -78,7 +78,7 @@ function LoginForm({navigation}) {
                 <TextInput
                   autoCapitalize="none"
                   placeholderTextColor={'#444'}
-                  placeholder="Phone Number,User Name or Email"
+                  placeholder="Email"
                   keyboardType="email-address"
                   onBlur={handleBlur('email')}
                   onChangeText={handleChange('email')}

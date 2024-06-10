@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -11,13 +11,12 @@ import {
 import * as Yup from 'yup';
 import {ErrorMessage, Formik} from 'formik';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore'
+import firestore from '@react-native-firebase/firestore';
 import {
   ALERT_TYPE,
   AlertNotificationRoot,
   Toast,
 } from 'react-native-alert-notification';
-
 
 const SignupFormSchema = Yup.object().shape({
   username: Yup.string()
@@ -32,58 +31,48 @@ const SignupFormSchema = Yup.object().shape({
 function SignupForm({navigation}) {
   const [loading, setLoading] = useState(false);
 
-
   // Getting random profile pictures
 
-  const getRandomProfilePicture = async ({navigation})=>{
-
-    const respone = await fetch("https://randomuser.me/api")
-    const data = await respone.json()
-    return data.results[0].picture.large
-  }
+  const getRandomProfilePicture = async () => {
+    const respone = await fetch('https://randomuser.me/api');
+    const data = await respone.json();
+    return data.results[0].picture.large;
+  };
 
   // Signup Function
-  const onSignup = async (email, password,username) => {
-    setLoading(true)
+  const onSignup = async (email, password, username) => {
+    setLoading(true);
     try {
-      await auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(async res => {
-          Toast.show({
-            type: ALERT_TYPE.SUCCESS,
-            title: 'Account Created',
-            autoClose: 1000,
-            textBody: 'You have been Registered!',
-          });
+      const res = await auth().createUserWithEmailAndPassword(email, password);
 
-          firestore()
-          .collection('Users')
-          .add({
-           userid:res.user.uid,
-           username,
-           email,
-            profilePicture: await getRandomProfilePicture()
-          })
-          .then(() => {
-            console.log('User added!');
-          });
-          // console.log(res.user.id)
-          navigation.push('HomeScreen');
+        Toast.show({
+          type:ALERT_TYPE.SUCCESS,
+          title:"Account Created",
+          textBody:"You have been Registered"
+        })
+
+      await firestore()
+        .collection('Users')
+        .doc(res.user.email)
+        .set({
+          userid: res.user.uid,
+          username,
+          email,
+          profilePicture: await getRandomProfilePicture(),
         });
-    } 
-    
-    
-    
-    
-    catch (e) {
+
+      console.log('User added!');
+
+      navigation.push('HomeScreen');
+    } catch (e) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
         autoClose: 1000,
         title: 'Signup Failed',
         textBody: e.code,
       });
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,7 +81,9 @@ function SignupForm({navigation}) {
       initialValues={{username: '', email: '', password: ''}}
       validationSchema={SignupFormSchema}
       validateOnMount={true}
-      onSubmit={values => onSignup(values.email, values.password,values.username)}>
+      onSubmit={values =>
+        onSignup(values.email, values.password, values.username)
+      }>
       {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
         <>
           <AlertNotificationRoot>
@@ -141,18 +132,20 @@ function SignupForm({navigation}) {
               <Text style={Styles.errormessage}>
                 <ErrorMessage name={'password'} />
               </Text>
-            
-              {
-                loading?(
-                  <ActivityIndicator size="small" color={"#FFF"} style={Styles.button}/>
 
-                ):
-              <Pressable style={Styles.button} onPress={handleSubmit}>
-                <Text style={{color: 'white'}}>Signup</Text>
-              </Pressable>
-              }
-              
-                <View style={Styles.Signupcontainer}>
+              {loading ? (
+                <ActivityIndicator
+                  size="small"
+                  color={'#FFF'}
+                  style={Styles.button}
+                />
+              ) : (
+                <Pressable style={Styles.button} onPress={handleSubmit}>
+                  <Text style={{color: 'white'}}>Signup</Text>
+                </Pressable>
+              )}
+
+              <View style={Styles.Signupcontainer}>
                 <Text>Don't have an account?</Text>
                 <Pressable onPress={() => navigation.replace('LoginScreen')}>
                   <Text style={{color: '#6AA0F5'}}> Login</Text>
