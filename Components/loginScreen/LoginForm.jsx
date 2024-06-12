@@ -1,7 +1,5 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import {
-  Alert,
-  Button,
   Pressable,
   StyleSheet,
   Text,
@@ -11,32 +9,29 @@ import {
   ActivityIndicator
 } from 'react-native';
 import * as Yup from 'yup';
-import {ErrorMessage, Formik} from 'formik';
+import { ErrorMessage, Formik } from 'formik';
 import auth from '@react-native-firebase/auth';
 import {
   AlertNotificationRoot,
   ALERT_TYPE,
   Toast,
 } from 'react-native-alert-notification';
+import StandardButton from '../Button';
 
-
-
-// Yup Schema 
+// Yup Schema
 const LoginFormSchema = Yup.object().shape({
   email: Yup.string().email().required('email is required'),
   password: Yup.string()
-  .min(6, 'Minimum 6 characters')
-  .required('Password is required'),
+    .min(6, 'Minimum 6 characters')
+    .required('password is required'),
 });
 
-
-
-function LoginForm({navigation}) {
-  
+function LoginForm({ navigation }) {
   const [loading, setLoading] = useState(false);
-// loginfunction
+
+  // login function
   const onLogin = async (email, password) => {
-    setLoading(true)
+    setLoading(true);
     try {
       await auth()
         .signInWithEmailAndPassword(email, password)
@@ -45,31 +40,57 @@ function LoginForm({navigation}) {
             type: ALERT_TYPE.SUCCESS,
             title: 'Login Successful',
             textBody: 'Successfully logged in',
-            autoClose:1000
+            autoClose: 1000
           });
-          navigation.push('HomeScreen');
+          // navigation.push('HomeScreen');
         });
-    }
-     catch (e) {
+    } catch (e) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
         title: 'Login Failed',
         textBody: e.code,
-        autoClose:1000,
-
+        autoClose: 1000,
       });
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
 
+  // forgotPassword
+  const forgotPassword = (email) => {
+    if (!email) {
+      Toast.show({
+        type: ALERT_TYPE.WARNING,
+        title: 'Email Required',
+        textBody: 'Please enter your email to reset your password',
+        autoClose: 1000,
+      });
+      return;
+    }
+    auth().sendPasswordResetEmail(email).then(() => {
+      Toast.show({
+        type: ALERT_TYPE.SUCCESS,
+        title: 'Email Sent',
+        textBody: 'Password reset email sent successfully',
+        autoClose: 2000,
+      });
+    }).catch((e) => {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Reset Failed',
+        textBody: e.message,
+        autoClose: 2000,
+      });
+    });
+  };
+
   return (
     <Formik
-      initialValues={{email: '', password: ''}}
+      initialValues={{ email: '', password: '' }}
       validationSchema={LoginFormSchema}
       validateOnMount={true}
       onSubmit={values => onLogin(values.email, values.password)}>
-      {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
+      {({ handleBlur, handleChange, handleSubmit, values, errors, isValid }) => (
         <>
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
@@ -77,8 +98,7 @@ function LoginForm({navigation}) {
               <View style={[Styles.inputFeild]}>
                 <TextInput
                   autoCapitalize="none"
-                  placeholderTextColor={'#444'}
-                  placeholder="Email"
+                  placeholder="email"
                   keyboardType="email-address"
                   onBlur={handleBlur('email')}
                   onChangeText={handleChange('email')}
@@ -86,21 +106,13 @@ function LoginForm({navigation}) {
                   //   autoFocus={true}
                 />
               </View>
-              <Text
-                style={{
-                  color: 'red',
-                  fontSize: 14,
-                  marginTop: -10,
-                  marginBottom: 10,
-                }}>
+              <Text style={Styles.errormessage}>
                 <ErrorMessage name={'email'} />
               </Text>
               <Text style={Styles.label}>password</Text>
               <View style={Styles.inputFeild}>
-
                 <TextInput
-                  placeholderTextColor={'#444'}
-                  placeholder="Password"
+                  placeholder="password"
                   textContentType="password"
                   secureTextEntry={true}
                   onBlur={handleBlur('password')}
@@ -108,13 +120,7 @@ function LoginForm({navigation}) {
                   value={values.password}
                 />
               </View>
-              <Text
-                style={{
-                  color: 'red',
-                  fontSize: 14,
-                  marginTop: -10,
-                  marginBottom: 10,
-                }}>
+              <Text style={Styles.errormessage}>
                 <ErrorMessage name={'password'} />
               </Text>
               <View
@@ -123,24 +129,20 @@ function LoginForm({navigation}) {
                   marginBottom: 20,
                   marginTop: -20,
                 }}>
-                <TouchableOpacity>
-                  <Text style={{color: '#6BB0F5'}}>Forgot password</Text>
+                <TouchableOpacity onPress={() => forgotPassword(values.email)}>
+                  <Text style={{ color: '#6BB0F5' }}>Forgot password</Text>
                 </TouchableOpacity>
               </View>
               {
-                loading?(
-                  <ActivityIndicator size="small" color={"#FFF"} style={Styles.button}/>
-
-                ):
-              <Pressable style={Styles.button} onPress={handleSubmit}>
-                <Text style={{color: 'white'}}>Login</Text>
-              </Pressable>
+                loading ? (
+                  <ActivityIndicator size="small" color={"#FFF"} style={Styles.button} />
+                ) :
+                  <StandardButton title={"Login"} onpress={handleSubmit} />
               }
-
               <View style={Styles.SignupContainer}>
                 <Text>Don't have an account?</Text>
                 <Pressable onPress={() => navigation.replace('SignupScreen')}>
-                  <Text style={{color: '#6AA0F5'}}> Signup</Text>
+                  <Text style={{ color: '#6AA0F5' }}> Signup</Text>
                 </Pressable>
               </View>
             </View>
@@ -153,12 +155,11 @@ function LoginForm({navigation}) {
 export default LoginForm;
 
 const Styles = StyleSheet.create({
-  label:{
-
-    margin:5
-
+  label: {
+    marginTop: -5,
+    marginLeft: 5,
+    marginBottom: 6
   },
-  
   inputFeild: {
     borderRadius: 4,
     padding: 10,
@@ -166,13 +167,17 @@ const Styles = StyleSheet.create({
     marginBottom: 20,
     borderWidth: 1,
     borderRadius: 20,
-    // borderTopRightRadius:20,
-    // borderTopLeftRadius:20
-    // margin:10
   },
   wrapper: {
     marginTop: 50,
     flex: 2,
+  },
+  errormessage: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: -20,
+    marginBottom: 10,
+    marginLeft: 3
   },
   SignupContainer: {
     flexDirection: 'row',
@@ -188,6 +193,5 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    // borderWidth:1
   },
 });

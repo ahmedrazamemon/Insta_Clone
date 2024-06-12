@@ -17,15 +17,16 @@ import {
   AlertNotificationRoot,
   Toast,
 } from 'react-native-alert-notification';
+import StandardButton from '../Button';
 
 const SignupFormSchema = Yup.object().shape({
   username: Yup.string()
-    .required('User name is required')
-    .min(3, 'User name must have 3 letters'),
+    .required('user name is required')
+    .min(3, 'user name must have 3 letters'),
   email: Yup.string().email().required('email is required'),
   password: Yup.string()
-    .min(6, 'Password Must be 6 characters long')
-    .required('Password is required'),
+    .min(6, 'password Must be 6 characters long')
+    .required('password is required'),
 });
 
 function SignupForm({navigation}) {
@@ -52,7 +53,7 @@ function SignupForm({navigation}) {
         })
 
       await firestore()
-        .collection('Users')
+        .collection('users')
         .doc(res.user.email)
         .set({
           userid: res.user.uid,
@@ -63,7 +64,6 @@ function SignupForm({navigation}) {
 
       console.log('User added!');
 
-      navigation.push('HomeScreen');
     } catch (e) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
@@ -88,11 +88,11 @@ function SignupForm({navigation}) {
         <>
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
+            <Text style={Styles.label}>user name</Text>
               <View style={Styles.inputFeild}>
                 <TextInput
                   autoCapitalize="none"
-                  placeholderTextColor={'#444'}
-                  placeholder="User Name"
+                  placeholder="user name"
                   keyboardType="twitter"
                   onBlur={handleBlur('username')}
                   onChangeText={handleChange('username')}
@@ -103,11 +103,12 @@ function SignupForm({navigation}) {
               <Text style={Styles.errormessage}>
                 <ErrorMessage name={'username'} />
               </Text>
-              <View style={[Styles.inputFeild]}>
+            <Text style={Styles.label}>email</Text>
+
+              <View style={Styles.inputFeild}>
                 <TextInput
                   autoCapitalize="none"
-                  placeholderTextColor={'#444'}
-                  placeholder="Email"
+                  placeholder="email"
                   keyboardType="email-address"
                   onBlur={handleBlur('email')}
                   onChangeText={handleChange('email')}
@@ -118,10 +119,11 @@ function SignupForm({navigation}) {
               <Text style={Styles.errormessage}>
                 <ErrorMessage name={'email'} />
               </Text>
+            <Text style={Styles.label}>password</Text>
+
               <View style={Styles.inputFeild}>
                 <TextInput
-                  placeholderTextColor={'#444'}
-                  placeholder="Password"
+                  placeholder="password"
                   textContentType="password"
                   secureTextEntry={true}
                   onBlur={handleBlur('password')}
@@ -140,9 +142,8 @@ function SignupForm({navigation}) {
                   style={Styles.button}
                 />
               ) : (
-                <Pressable style={Styles.button} onPress={handleSubmit}>
-                  <Text style={{color: 'white'}}>Signup</Text>
-                </Pressable>
+                <StandardButton title={"Signup"} onpress={handleSubmit}/>
+
               )}
 
               <View style={Styles.Signupcontainer}>
@@ -191,8 +192,15 @@ const Styles = StyleSheet.create({
   },
   errormessage: {
     color: 'red',
-    fontSize: 14,
-    marginTop: -10,
+    fontSize: 12,
+    marginTop: -20,
     marginBottom: 10,
+    marginLeft:3
   },
+  label:{
+    marginTop:-3,
+    marginBottom:6,
+    marginLeft:5
+
+  }
 });

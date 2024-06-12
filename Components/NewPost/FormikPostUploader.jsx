@@ -21,14 +21,15 @@ function FormikPostUploader({navigation}) {
   const getUserName = () => {
     const user = auth().currentUser;
     const unSubscribe = firestore()
-      .collection('Users')
+      .collection('users')
       .where('userid', '==', user.uid)
       .limit(1)
       .onSnapshot(snapshot => {
         snapshot.docs.map(doc => {
           setcurrentLoggedInUser({
             username: doc.data().username,
-            profilePicture: doc.data().profilePicture, // Corrected spelling
+            profilePicture: doc.data().profilePicture, 
+            email:doc.data().email
           });
         });
       });
@@ -38,7 +39,7 @@ function FormikPostUploader({navigation}) {
 
   useEffect(() => {
     const unsubscribe = getUserName();
-    return () => unsubscribe && unsubscribe(); // Clean up subscription on unmount
+    return () => unsubscribe && unsubscribe(); 
   }, []);
 
   const postUploader = (imgurl, caption) => {
@@ -50,12 +51,14 @@ function FormikPostUploader({navigation}) {
       .add({
         imgurl: imgurl,
         caption: caption,
+        username:currentLoggedInUser?.username,
+        email:currentLoggedInUser?.email,
         profilePicture: currentLoggedInUser?.profilePicture,
         userid: user.uid,
         createdAt: firestore.FieldValue.serverTimestamp(),
         likes: 0,
         comments: [],
-        likesbyuse: [],
+        likesbyuser: [],
       })
       .then(() => {
         console.log('Data Added');

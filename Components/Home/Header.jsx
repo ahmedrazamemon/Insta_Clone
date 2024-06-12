@@ -27,7 +27,7 @@ catch(e){
           <TouchableOpacity onPress={()=>navigation.navigate("NewPostScreen")}>
             <Icon style={style.icon} name="plussquareo" size={30} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate("ChangePassword")}>
             <Icon style={style.icon} name="hearto" size={30} />
           </TouchableOpacity>
           <TouchableOpacity>

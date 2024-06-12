@@ -2,11 +2,11 @@ import React from "react";
 import { StyleSheet, Text, View ,Image, StatusBar} from "react-native";
 import SignupForm from "../Components/SignupScreen/SignupForm";
 import { ScrollView } from "react-native";
-
+import Logo from '../Assets/Images/instalogo.webp'
 function SignupScreen({navigation}){
 
     
-const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/62-instagram-512.png"
+// const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/62-instagram-512.png"
 
     return(
         <View style={Styles.container}>
@@ -14,7 +14,7 @@ const InstaLogo = "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/5
            
            <ScrollView showsVerticalScrollIndicator={false}>
            <View style={Styles.logoConatiner}>
-            <Image source={{uri:InstaLogo}} style={{width:100,height:100}}/>
+            <Image source={Logo} style={{width:100,height:100}}/>
            </View>
 
            <SignupForm navigation={navigation}/>
