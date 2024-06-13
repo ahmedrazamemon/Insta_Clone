@@ -3,13 +3,12 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import * as Yup from 'yup';
-import { ErrorMessage, Formik } from 'formik';
+import { Formik ,ErrorMessage} from 'formik';
 import auth from '@react-native-firebase/auth';
 import {
   AlertNotificationRoot,
@@ -17,6 +16,7 @@ import {
   Toast,
 } from 'react-native-alert-notification';
 import StandardButton from '../Button';
+import InputField from '../InputFeild'; // Update the path as necessary
 
 // Yup Schema
 const LoginFormSchema = Yup.object().shape({
@@ -40,7 +40,7 @@ function LoginForm({ navigation }) {
             type: ALERT_TYPE.SUCCESS,
             title: 'Login Successful',
             textBody: 'Successfully logged in',
-            autoClose: 1000
+            autoClose: 1000,
           });
           // navigation.push('HomeScreen');
         });
@@ -57,7 +57,7 @@ function LoginForm({ navigation }) {
   };
 
   // forgotPassword
-  const forgotPassword = (email) => {
+  const forgotPassword = email => {
     if (!email) {
       Toast.show({
         type: ALERT_TYPE.WARNING,
@@ -67,21 +67,24 @@ function LoginForm({ navigation }) {
       });
       return;
     }
-    auth().sendPasswordResetEmail(email).then(() => {
-      Toast.show({
-        type: ALERT_TYPE.SUCCESS,
-        title: 'Email Sent',
-        textBody: 'Password reset email sent successfully',
-        autoClose: 2000,
+    auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        Toast.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Email Sent',
+          textBody: 'Password reset email sent successfully',
+          autoClose: 2000,
+        });
+      })
+      .catch(e => {
+        Toast.show({
+          type: ALERT_TYPE.DANGER,
+          title: 'Reset Failed',
+          textBody: e.message,
+          autoClose: 2000,
+        });
       });
-    }).catch((e) => {
-      Toast.show({
-        type: ALERT_TYPE.DANGER,
-        title: 'Reset Failed',
-        textBody: e.message,
-        autoClose: 2000,
-      });
-    });
   };
 
   return (
@@ -90,39 +93,35 @@ function LoginForm({ navigation }) {
       validationSchema={LoginFormSchema}
       validateOnMount={true}
       onSubmit={values => onLogin(values.email, values.password)}>
-      {({ handleBlur, handleChange, handleSubmit, values, errors, isValid }) => (
+      {({
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        values,
+        errors,
+        isValid,
+      }) => (
         <>
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
-              <Text style={Styles.label}>email</Text>
-              <View style={[Styles.inputFeild]}>
-                <TextInput
-                  autoCapitalize="none"
-                  placeholder="email"
-                  keyboardType="email-address"
-                  onBlur={handleBlur('email')}
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  //   autoFocus={true}
-                />
-              </View>
-              <Text style={Styles.errormessage}>
-                <ErrorMessage name={'email'} />
-              </Text>
-              <Text style={Styles.label}>password</Text>
-              <View style={Styles.inputFeild}>
-                <TextInput
-                  placeholder="password"
-                  textContentType="password"
-                  secureTextEntry={true}
-                  onBlur={handleBlur('password')}
-                  onChangeText={handleChange('password')}
-                  value={values.password}
-                />
-              </View>
-              <Text style={Styles.errormessage}>
-                <ErrorMessage name={'password'} />
-              </Text>
+              <InputField
+                label="Email"
+                placeholder="email"
+                keyboardType="email-address"
+                value={values.email}
+                onBlur={handleBlur('email')}
+                onChangeText={handleChange('email')}
+                error={<ErrorMessage name="email" />}
+              />
+              <InputField
+                label="Password"
+                placeholder="password"
+                secureTextEntry
+                value={values.password}
+                onBlur={handleBlur('password')}
+                onChangeText={handleChange('password')}
+                error={<ErrorMessage name="password" />}
+              />
               <View
                 style={{
                   alignItems: 'flex-end',
@@ -133,12 +132,15 @@ function LoginForm({ navigation }) {
                   <Text style={{ color: '#6BB0F5' }}>Forgot password</Text>
                 </TouchableOpacity>
               </View>
-              {
-                loading ? (
-                  <ActivityIndicator size="small" color={"#FFF"} style={Styles.button} />
-                ) :
-                  <StandardButton title={"Login"} onpress={handleSubmit} />
-              }
+              {loading ? (
+                <ActivityIndicator
+                  size="small"
+                  color={'#FFF'}
+                  style={Styles.button}
+                />
+              ) : (
+                <StandardButton title={'Login'} onpress={handleSubmit} />
+              )}
               <View style={Styles.SignupContainer}>
                 <Text>Don't have an account?</Text>
                 <Pressable onPress={() => navigation.replace('SignupScreen')}>
@@ -155,29 +157,9 @@ function LoginForm({ navigation }) {
 export default LoginForm;
 
 const Styles = StyleSheet.create({
-  label: {
-    marginTop: -5,
-    marginLeft: 5,
-    marginBottom: 6
-  },
-  inputFeild: {
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: '#FAFAFA',
-    marginBottom: 20,
-    borderWidth: 1,
-    borderRadius: 20,
-  },
   wrapper: {
     marginTop: 50,
     flex: 2,
-  },
-  errormessage: {
-    color: 'red',
-    fontSize: 12,
-    marginTop: -20,
-    marginBottom: 10,
-    marginLeft: 3
   },
   SignupContainer: {
     flexDirection: 'row',

@@ -4,9 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  View,
+   View,
 } from 'react-native';
 import * as Yup from 'yup';
 import {ErrorMessage, Formik} from 'formik';
@@ -18,6 +16,8 @@ import {
   Toast,
 } from 'react-native-alert-notification';
 import StandardButton from '../Button';
+import Loader from '../Loader';
+import InputField from '../InputFeild';
 
 const SignupFormSchema = Yup.object().shape({
   username: Yup.string()
@@ -88,58 +88,39 @@ function SignupForm({navigation}) {
         <>
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
-            <Text style={Styles.label}>user name</Text>
-              <View style={Styles.inputFeild}>
-                <TextInput
-                  autoCapitalize="none"
-                  placeholder="user name"
-                  keyboardType="twitter"
-                  onBlur={handleBlur('username')}
-                  onChangeText={handleChange('username')}
-                  value={values.username}
-                  //   autoFocus={true}
-                />
-              </View>
-              <Text style={Styles.errormessage}>
-                <ErrorMessage name={'username'} />
-              </Text>
-            <Text style={Styles.label}>email</Text>
-
-              <View style={Styles.inputFeild}>
-                <TextInput
-                  autoCapitalize="none"
-                  placeholder="email"
-                  keyboardType="email-address"
-                  onBlur={handleBlur('email')}
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  //   autoFocus={true}
-                />
-              </View>
-              <Text style={Styles.errormessage}>
-                <ErrorMessage name={'email'} />
-              </Text>
-            <Text style={Styles.label}>password</Text>
-
-              <View style={Styles.inputFeild}>
-                <TextInput
-                  placeholder="password"
-                  textContentType="password"
-                  secureTextEntry={true}
-                  onBlur={handleBlur('password')}
-                  onChangeText={handleChange('password')}
-                  value={values.password}
-                />
-              </View>
-              <Text style={Styles.errormessage}>
-                <ErrorMessage name={'password'} />
-              </Text>
-
+            <InputField
+                label={"user name"}
+                placeholder={"user name"}
+                keyboardType={"twitter"}
+                value={values.username}
+                onBlur={handleBlur('username')}
+                onChangeText={handleChange('username')}
+                error={<ErrorMessage name="username" />}
+              />
+              
+           <InputField
+           label={"email"}
+           placeholder={"email"}
+           keyboardType='email-address'
+           value={values.email}
+           onBlur={handleBlur("email")}
+           onChangeText={handleChange("email")}
+           error={<ErrorMessage name='email'/>}
+           />
+          <InputField
+          label={"password"}
+          placeholder={"password"}
+          value={values.password}
+          onChangeText={handleChange("password")}
+          onBlur={handleBlur("password")}
+          keyboardType='password'
+          secureTextEntry={true}
+          error={<ErrorMessage name='password'/>}
+/>
               {loading ? (
-                <ActivityIndicator
+                <Loader
                   size="small"
                   color={'#FFF'}
-                  style={Styles.button}
                 />
               ) : (
                 <StandardButton title={"Signup"} onpress={handleSubmit}/>
@@ -147,7 +128,7 @@ function SignupForm({navigation}) {
               )}
 
               <View style={Styles.Signupcontainer}>
-                <Text>Don't have an account?</Text>
+                <Text>Already have an account?</Text>
                 <Pressable onPress={() => navigation.replace('LoginScreen')}>
                   <Text style={{color: '#6AA0F5'}}> Login</Text>
                 </Pressable>
@@ -169,9 +150,6 @@ const Styles = StyleSheet.create({
     marginBottom: 20,
     borderWidth: 1,
     borderRadius: 20,
-    // borderTopRightRadius:20,
-    // borderTopLeftRadius:20
-    // margin:10
   },
   wrapper: {
     marginTop: 50,
@@ -182,14 +160,14 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
-  button: {
-    backgroundColor: '#6AA0F5',
-    minHeight: 43,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    // borderWidth:1
-  },
+  // button: {
+  //   backgroundColor: '#6AA0F5',
+  //   minHeight: 43,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   borderRadius: 10,
+  //   // borderWidth:1
+  // },
   errormessage: {
     color: 'red',
     fontSize: 12,

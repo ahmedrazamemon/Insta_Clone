@@ -5,7 +5,7 @@ import HomeScreen from './HomeScreen';
 import NewPostScreen from './NewPostScreen';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
-import ChangePassword from '../Components/ChangePassword';
+import BottomNavigation from './BottomNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,7 @@ export const SignInStack = () => {
         <Stack.Screen
           name="HomeScreen"
           options={{headerShown: false}}
-          component={HomeScreen}
+          component={BottomNavigation}
         />
 
         <Stack.Screen
@@ -24,11 +24,7 @@ export const SignInStack = () => {
           options={{headerShown: false}}
           component={NewPostScreen}
         />
-        <Stack.Screen
-        name='ChangePassword'
-        options={{headerShown:false}}
-        component={ChangePassword}
-        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

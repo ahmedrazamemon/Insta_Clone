@@ -5,19 +5,11 @@ import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import auth from '@react-native-firebase/auth'
 function Header({navigation}) {
 
-  const handleSignOut=async ()=>{
-try{
-
-  await auth().signOut()
-}
-catch(e){
-  console.log(e.code)
-}
-  }
+ 
   return (
     <>
       <View style={style.container}>
-        <TouchableOpacity onPress={handleSignOut}>
+        <TouchableOpacity >
           <Image
             style={style.logo}
             source={require('../../Assets/Images/logo.png')}
@@ -25,16 +17,16 @@ catch(e){
         </TouchableOpacity>
         <View style={style.iconcontainer}>
           <TouchableOpacity onPress={()=>navigation.navigate("NewPostScreen")}>
-            <Icon style={style.icon} name="plussquareo" size={30} />
+            <Icon style={style.icon} name="plussquareo" size={25} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>navigation.navigate("ChangePassword")}>
-            <Icon style={style.icon} name="hearto" size={30} />
+          <TouchableOpacity >
+            <Icon style={style.icon} name="hearto" size={25} />
           </TouchableOpacity>
           <TouchableOpacity>
             <View style={style.unreadBadge}>
               <Text style={style.textUnreadBadge}>11</Text>
             </View>
-            <Icon2 style={style.icon} name="facebook-messenger"  size={30} />
+            <Icon2 style={style.icon} name="facebook-messenger"  size={25} />
           </TouchableOpacity>
         </View>
       </View>

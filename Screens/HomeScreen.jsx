@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import Header from '../Components/Home/Header';
@@ -9,6 +11,8 @@ import Stories from '../Components/Home/Stories';
 import Posts from '../Components/Home/Post';
 import firestore from '@react-native-firebase/firestore';
 import BottomTabs, {BottomTabIcons} from '../Components/Home/BottomTabs';
+import Loader from '../Components/Loader';
+import BottomNavigation from './BottomNavigation';
 function HomeScreen({navigation}) {
   const [postData, setpostData] = useState([]);
 
@@ -24,11 +28,14 @@ function HomeScreen({navigation}) {
       <Header navigation={navigation} />
       <Stories />
       <ScrollView>
-        {postData.map((post, index) => (
+        {
+        postData.length==0?<ActivityIndicator size={"large"} color={"#FFF"} style={{alignContent:"center"}}/>:
+        postData.map((post, index) => (
           <Posts post={post} key={index} />
         ))}
       </ScrollView>
-      <BottomTabs icons={BottomTabIcons} />
+      {/* <BottomNavigation/> */}
+      {/* <BottomTabs  icons={BottomTabIcons} /> */}
     </View>
   );
 }

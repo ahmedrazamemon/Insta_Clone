@@ -1,4 +1,3 @@
-import react from "react";
 import { Pressable,Text,StyleSheet } from "react-native";
 function StandardButton({title,onpress}){
 

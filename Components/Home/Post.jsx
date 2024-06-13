@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -36,7 +35,7 @@ function Posts({post}) {
 
   return (
     <View style={{marginBottom: 30}}>
-      <Divider width={1} orientation="vertical" />
+      {/* <Divider width={1} orientation="vertical" /> */}
       <PostHeader post={post} />
       <PostImage post={post} />
       <View style={{marginHorizontal: 15, marginTop: 10}}>
@@ -82,7 +81,7 @@ const PostImage = ({post}) => {
 };
 
 const FooterIcons = ({handleLike, post}) => {
-  const iconNames = ['heart','heart-o', 'comment-o', 'share', 'bookmark'];
+  const iconNames = ['heart','heart-o', 'comment-o', 'send-o', 'bookmark-o'];
   return (
     <View style={styles.container}>
       <View style={styles.leftIcons}>
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // padding: 20,
+    
   },
   leftIcons: {
     marginTop: 6,

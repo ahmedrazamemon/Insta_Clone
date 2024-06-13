@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Divider } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import auth from '@react-native-firebase/auth';
+
 export const BottomTabIcons = [
   {
     name: 'Home',
@@ -23,13 +24,7 @@ export const BottomTabIcons = [
     active: 'cart',
     inactive: 'cart-outline',
   },
-  {
-    name: 'Profile',
-    active: 'person',
-    inactive: 'person-outline',
-  },
 ];
-
 
 const BottomTabs = ({ icons }) => {
   const [activeTab, setActiveTab] = useState('Home');
@@ -48,6 +43,9 @@ const BottomTabs = ({ icons }) => {
       {icons.map((icon, index) => (
         <IconComponent key={index} icon={icon} />
       ))}
+      <TouchableOpacity onPress={() => auth().signOut()}>
+        <Ionicons name="person-outline" size={30} color="white" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -56,10 +54,11 @@ export default BottomTabs;
 
 const styles = StyleSheet.create({
   container: {
-    padding:10,
-    margin:"auto",
+    padding: 10,
+    margin: 'auto',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom:50
+    marginBottom: 50,
+    backgroundColor: '#000', // Adjust as necessary
   },
 });
