@@ -4,9 +4,9 @@ import { View,Text } from "react-native";
 function Search(){
 
     return(
-        <View>
+        <View style={{backgroundColor:"black",flex:1}}>
 
-            <Text>Search Screen</Text>
+            <Text style={{color:"white",marginTop:100,textAlign:"center"}}>Search Screen</Text>
         </View>
     )
 }

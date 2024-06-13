@@ -4,10 +4,10 @@ import { View,Text } from "react-native";
 function Reels(){
 
     return(
-        <View>
+        
+        <View style={{backgroundColor:"black",flex:1}}>
 
-            <Text>Reels Screen</Text>
-        </View>
-    )
+            <Text style={{color:"white",marginTop:100,textAlign:"center"}}>Reels Screen</Text>
+        </View> )
 }
 export default Reels;

@@ -73,6 +73,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../Screens/HomeScreen';
 import NewPostScreen from '../Screens/NewPostScreen';
+import Search from '../Components/NewPost/Search';
+import Reels from '../Components/NewPost/Reels';
+import Market from '../Components/NewPost/Market';
+import Profile from '../Components/NewPost/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -91,15 +95,24 @@ export default function BottomNavigation() {
             iconName = focused
               ? 'home'
               : 'home-outline';
-          } else if (route.name === 'NewPostScreen') {
+          } else if (route.name === 'Search') {
+            iconName = focused
+              ? 'search'
+              : 'search-outline';
+          }
+           else if (route.name === 'Reels') {
             iconName = focused
               ? 'play-circle'
               : 'play-circle-outline';
           }
-           else if (route.name === 'NewPostScreen') {
+          else if (route.name === 'Market') {
             iconName = focused
-              ? 'play-circle'
-              : 'play-circle-outline';
+              ? 'cart'
+              : 'cart-outline';
+          }else if (route.name === 'Profile') {
+            iconName = focused
+              ? 'person'
+              : 'person-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -108,7 +121,11 @@ export default function BottomNavigation() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="NewPostScreen" component={NewPostScreen} />
+      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Reels" component={Reels} />
+      <Tab.Screen name="Market" component={Market} />
+      <Tab.Screen name="Profile" component={Profile} />
+
     </Tab.Navigator>
   );
 }

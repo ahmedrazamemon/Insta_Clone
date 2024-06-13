@@ -4,9 +4,10 @@ import { View,Text } from "react-native";
 function Market(){
 
     return(
-        <View>
+        
+        <View style={{backgroundColor:"black",flex:1}}>
 
-            <Text>Market Screen</Text>
+            <Text style={{color:"white",marginTop:100,textAlign:"center"}}>Shop Screen</Text>
         </View>
     )
 }

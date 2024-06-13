@@ -14,7 +14,7 @@ export const SignInStack = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen
-          name="HomeScreen"
+          name="BottomNavigation"
           options={{headerShown: false}}
           component={BottomNavigation}
         />
