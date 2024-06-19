@@ -9,6 +9,7 @@ import {Divider, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import Loader from '../Loader';
 function Posts({post}) {
   const handleLike = post => {
     const currentLikeStatus = !post.likesbyuser.includes(
@@ -72,10 +73,14 @@ const PostHeader = ({post}) => {
 const PostImage = ({post}) => {
   return (
     <View style={{width: '100%', height: 250}}>
+     {
+      post.imgurl?
       <Image
-        source={{uri: post.imgurl}}
-        style={{resizeMode: 'cover', height: '100%', width: '100%'}}
-      />
+      source={{uri: post.imgurl}}
+      style={{resizeMode: 'cover', height: '100%', width: '100%'}}
+      />:
+      <Loader color={"white"} size={20}/>
+    }
     </View>
   );
 };
