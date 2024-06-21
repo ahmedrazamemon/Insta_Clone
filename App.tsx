@@ -7,7 +7,6 @@ import BottomNavigation from "./Screens/BottomNavigation";
 
 export default function App(){
   useEffect(() => {
-    // SplashScreen.hide()
     // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
     AvoidSoftInput.setEnabled(true);
     AvoidSoftInput.setShouldMimicIOSBehavior(true);

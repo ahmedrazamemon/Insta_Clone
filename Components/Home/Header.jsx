@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
-import auth from '@react-native-firebase/auth'
 function Header({navigation}) {
 
  

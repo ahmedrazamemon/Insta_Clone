@@ -44,7 +44,9 @@ function LoginForm({ navigation }) {
           });
           // navigation.push('HomeScreen');
         });
+        setLoading(false)
     } catch (e) {
+      setLoading(false)
       Toast.show({
         type: ALERT_TYPE.DANGER,
         title: 'Login Failed',
@@ -139,7 +141,7 @@ function LoginForm({ navigation }) {
                   style={Styles.button}
                 />
               ) : (
-                <StandardButton title={'Login'} onpress={handleSubmit} />
+                <StandardButton title={'Login'} style={Styles.button} onpress={handleSubmit} />
               )}
               <View style={Styles.SignupContainer}>
                 <Text>Don't have an account?</Text>

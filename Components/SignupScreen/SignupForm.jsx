@@ -91,7 +91,6 @@ function SignupForm({navigation}) {
             <InputField
                 label={"user name"}
                 placeholder={"user name"}
-                keyboardType={"twitter"}
                 value={values.username}
                 onBlur={handleBlur('username')}
                 onChangeText={handleChange('username')}
@@ -123,7 +122,7 @@ function SignupForm({navigation}) {
                   color={'#FFF'}
                 />
               ) : (
-                <StandardButton title={"Signup"} onpress={handleSubmit}/>
+                <StandardButton title={"Signup"} style={Styles.button} onpress={handleSubmit}/>
 
               )}
 
@@ -160,14 +159,16 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
-  // button: {
-  //   backgroundColor: '#6AA0F5',
-  //   minHeight: 43,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   borderRadius: 10,
-  //   // borderWidth:1
-  // },
+  button: {
+    backgroundColor: '#6AA0F5',
+    minHeight: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    width:400
+    // borderWidth:1
+},
+    
   errormessage: {
     color: 'red',
     fontSize: 12,

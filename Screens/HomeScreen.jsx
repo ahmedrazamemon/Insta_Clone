@@ -10,9 +10,7 @@ import Header from '../Components/Home/Header';
 import Stories from '../Components/Home/Stories';
 import Posts from '../Components/Home/Post';
 import firestore from '@react-native-firebase/firestore';
-import BottomTabs, {BottomTabIcons} from '../Components/Home/BottomTabs';
 import Loader from '../Components/Loader';
-import BottomNavigation from './BottomNavigation';
 function HomeScreen({navigation}) {
   const [postData, setpostData] = useState([]);
 
@@ -29,7 +27,7 @@ function HomeScreen({navigation}) {
       <Stories />
       <ScrollView>
         {
-        postData.length==0?<ActivityIndicator size={"large"} color={"#FFF"} style={{alignContent:"center"}}/>:
+        postData.length==0?<Loader size={"large"} color={"#FFF"} style={style.loader}/>:
         postData.map((post, index) => (
           <Posts post={post} key={index} />
         ))}
@@ -46,4 +44,12 @@ const style = StyleSheet.create({
     backgroundColor: 'black',
     flex: 1,
   },
+  loader: {
+    // backgroundColor: '#6AA0F5',
+    minHeight: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    // borderWidth:1
+}
 });

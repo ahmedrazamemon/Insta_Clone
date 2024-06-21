@@ -1,22 +1,13 @@
 import { Pressable,Text,StyleSheet } from "react-native";
-function StandardButton({title,onpress}){
+function StandardButton({title,onpress,style}){
 
 return(
-    <Pressable style={Styles.button} onPress={onpress}>
+    <Pressable style={style} onPress={onpress}>
     <Text style={{color: 'white'}}>{title}</Text>
   </Pressable>
 
 )
 }
 
-const Styles=StyleSheet.create({
-    button: {
-        backgroundColor: '#6AA0F5',
-        minHeight: 43,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        // borderWidth:1
-      }
-})
+ 
 export default StandardButton;

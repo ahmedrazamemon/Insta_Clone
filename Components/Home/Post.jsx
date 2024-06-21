@@ -79,7 +79,7 @@ const PostImage = ({post}) => {
       source={{uri: post.imgurl}}
       style={{resizeMode: 'cover', height: '100%', width: '100%'}}
       />:
-      <Loader color={"white"} size={20}/>
+      <Loader color={"white"} size={20} style={styles.loader}/>
     }
     </View>
   );
@@ -178,6 +178,14 @@ const Comments = ({post}) => {
 export default Posts;
 
 const styles = StyleSheet.create({
+  loader: {
+    backgroundColor: '#6AA0F5',
+    minHeight: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    // borderWidth:1
+},
   image: {
     width: 35,
     height: 35,
