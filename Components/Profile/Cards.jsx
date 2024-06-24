@@ -29,7 +29,7 @@ function Cards() {
           <Loader
             size={'large'}
             color={'#FFF'}
-            style={{alignContent: 'center'}}
+            style={Styles.loader}
           />
         ) : (
           userslist.map((users, index) => (
@@ -49,7 +49,7 @@ function Cards() {
           ))
         )}
       </ScrollView>
-      <StandardButton title={"logout"} onpress={()=>auth().signOut()} style={Styles.lgbutton}/>
+      {/* <StandardButton title={"logout"} onpress={()=>auth().signOut()} style={Styles.lgbutton}/> */}
     </View>
   );
 }
@@ -62,6 +62,14 @@ const Styles = StyleSheet.create({
     borderRadius: 150,
     borderColor:"white",
     // marginBottom:10
+  },
+  loader:{
+      minHeight: 43,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+      width:450
+      // borderWidth:1
   },
   card: {
     marginTop:15,

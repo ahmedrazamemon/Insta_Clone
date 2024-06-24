@@ -100,7 +100,6 @@ function SignupForm({navigation}) {
            <InputField
            label={"email"}
            placeholder={"email"}
-           keyboardType='email-address'
            value={values.email}
            onBlur={handleBlur("email")}
            onChangeText={handleChange("email")}
@@ -112,7 +111,6 @@ function SignupForm({navigation}) {
           value={values.password}
           onChangeText={handleChange("password")}
           onBlur={handleBlur("password")}
-          keyboardType='password'
           secureTextEntry={true}
           error={<ErrorMessage name='password'/>}
 />
@@ -120,6 +118,7 @@ function SignupForm({navigation}) {
                 <Loader
                   size="small"
                   color={'#FFF'}
+                  style={Styles.button}
                 />
               ) : (
                 <StandardButton title={"Signup"} style={Styles.button} onpress={handleSubmit}/>

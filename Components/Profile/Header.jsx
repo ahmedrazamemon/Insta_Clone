@@ -27,7 +27,7 @@ function Header({navigation}) {
               color={'white'}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate("ProfileSetting")}>
             <Icon
               style={Styles.iconcontainer}
               name="bars"

@@ -13,6 +13,18 @@ import {
 function ProfileDetails() {
   const [userdata, setuserdata] = useState([]);
 
+  const user = auth().currentUser.email;
+
+
+  // const posts =async ()=>{
+
+  const posts =  firestore().collection("users").doc(user).collection("posts").get()
+  // }
+
+  useEffect(()=>{
+    posts
+    // console.log(posts)
+  },[])
   const userProfileData = () => {
     const user = auth().currentUser;
     const unSubscribe = firestore()

@@ -9,6 +9,7 @@ const InputField = ({
   value,
   onBlur,
   onChangeText,
+  placeholdercolor,
   error,
 }) => {
   return (
@@ -23,6 +24,7 @@ const InputField = ({
           onBlur={onBlur}
           onChangeText={onChangeText}
           autoCapitalize="none"
+          
         />
       </View>
       {error && <Text style={styles.errorMessage}>{error}</Text>}

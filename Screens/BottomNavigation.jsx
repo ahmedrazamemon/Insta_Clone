@@ -5,7 +5,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import Search from '../Components/NewPost/Search';
 import Reels from '../Components/NewPost/Reels';
 import Market from '../Components/NewPost/Market';
-import Profile from '../Components/Profile/ProfileDetails';
+// import Profile from '../Components/Profile/ProfileDetails';
 import ProfileScreen from './ProfileScreen';
 
 const Tab = createBottomTabNavigator();

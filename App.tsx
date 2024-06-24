@@ -4,7 +4,7 @@ import { AvoidSoftInput } from "react-native-avoid-softinput";
 import AuthNavigation from "./Screens/AuthNavigation";
 import COLORS from './Colors';
 import BottomNavigation from "./Screens/BottomNavigation";
-
+import 'react-native-gesture-handler';
 export default function App(){
   useEffect(() => {
     // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
@@ -22,8 +22,8 @@ export default function App(){
           barStyle={Platform.OS == 'ios' ? 'dark-content' : 'light-content'}
           backgroundColor={COLORS.primary}
           />
-          {/* <BottomNavigation/> */}
           <AuthNavigation/>
+          {/* <BottomNavigation/> */}
    </SafeAreaView>
   )
   

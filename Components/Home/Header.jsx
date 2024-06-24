@@ -52,7 +52,7 @@ const style = StyleSheet.create({
   },
   icon: {
     marginLeft: 10,
-    resizeMode: 'contain',
+    // resizeMode: 'contain',
     color: 'white',
   },
   unreadBadge: {

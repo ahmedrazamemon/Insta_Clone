@@ -10,6 +10,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Loader from '../Loader';
+import { Pressable } from 'react-native';
+import Icon1 from 'react-native-vector-icons/Entypo'
 function Posts({post}) {
   const handleLike = post => {
     const currentLikeStatus = !post.likesbyuser.includes(
@@ -63,8 +65,13 @@ const PostHeader = ({post}) => {
         <Image source={{uri: post.profilePicture}} style={styles.image} />
         <Text style={styles.name}>{post.username}</Text>
       </View>
-      <View>
-        <Text style={{color: 'white', fontWeight: 900}}>...</Text>
+      <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+      <Pressable style={styles.button}>
+                <Text style={{color:"black",fontWeight:500}}>Follow</Text>
+              </Pressable>
+              <Pressable style={{marginTop:20}}>
+              <Icon1 name='dots-three-vertical' size={18} color={"white"}/>
+              </Pressable>
       </View>
     </View>
   );
@@ -219,5 +226,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 4,
+  },
+  button: {
+    backgroundColor: 'white',
+    minHeight: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop:15,
+    width: 80
   },
 });

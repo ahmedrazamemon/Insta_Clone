@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FormikPostUploader from './FormikPostUploader';
+import BottomNavigation from '../../Screens/BottomNavigation';
 
 function AddNewPost({navigation}) {
   return (
@@ -19,6 +20,7 @@ const Header = ({navigation}) => {
       </TouchableOpacity>
       <Text style={Styles.HeaderText}>NEW POST</Text>
       <Text></Text>
+      {/* <BottomNavigation/> */}
     </View>
   );
 };
