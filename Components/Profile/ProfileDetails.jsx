@@ -13,18 +13,29 @@ import {
 function ProfileDetails() {
   const [userdata, setuserdata] = useState([]);
 
-  const user = auth().currentUser.email;
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
 
-  // const posts =async ()=>{
+    const getCurrentUserPosts = async () => {
+      const user = auth().currentUser;
+      if (user) {
+        const userDocRef = firestore().collection('users').doc(user.email);
+        const postsCollectionRef = userDocRef.collection('posts');
+        const postsSnapshot = await postsCollectionRef.get();
 
-  const posts =  firestore().collection("users").doc(user).collection("posts").get()
-  // }
+        const postsList = postsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
 
-  useEffect(()=>{
-    posts
-    // console.log(posts)
-  },[])
+        setPosts(postsList);
+      }
+    };
+
+    getCurrentUserPosts();
+  }, []);
+
   const userProfileData = () => {
     const user = auth().currentUser;
     const unSubscribe = firestore()
@@ -78,7 +89,7 @@ function ProfileDetails() {
             />
           </View>
           <View style={{alignItems: 'center'}}>
-            <Text style={{color: 'white'}}>0</Text>
+            <Text style={{color: 'white'}}>{posts.length}</Text>
             <Text style={{color: 'white'}}>posts</Text>
           </View>
 
@@ -91,11 +102,15 @@ function ProfileDetails() {
             <Text style={{color: 'white'}}>following</Text>
           </View>
         </View>
-        <View style={{marginLeft:10,marginTop:6}}>
-          <Text style={{color: 'white',fontWeight:500}}>{userdata.username}</Text>
+        <View style={{marginLeft: 10, marginTop: 6}}>
+          <Text style={{color: 'white', fontWeight: 500}}>
+            {userdata.username}
+          </Text>
           <TouchableOpacity>
-          <Text style={{color:"#6BB0F5",fontVariant:"bold"}}>Add Your Bio</Text>
-            </TouchableOpacity>
+            <Text style={{color: '#6BB0F5', fontVariant: 'bold'}}>
+              Add Your Bio
+            </Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -105,22 +120,16 @@ function ProfileDetails() {
             marginTop: 10,
           }}>
           <View>
-            <StandardButton
-              style={style.button}
-              title={'Edit profile'}
-            />
+            <StandardButton style={style.button} title={'Edit profile'} />
           </View>
           <View>
-            <StandardButton
-              style={style.button}
-              title={'Share profile'}
-            />
+            <StandardButton style={style.button} title={'Share profile'} />
           </View>
           <TouchableOpacity>
             <Icon
               name="person-add"
               style={{
-                width:38,
+                width: 38,
                 borderWidth: 1.5,
                 borderColor: 'white',
                 padding: 9,
@@ -152,8 +161,8 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    borderWidth:1.5,
-    borderColor:"white",
+    borderWidth: 1.5,
+    borderColor: 'white',
     width: 185,
   },
 });

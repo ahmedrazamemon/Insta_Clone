@@ -1,12 +1,14 @@
 import {Pressable, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
-import InputField from '../InputFeild';
 import auth from '@react-native-firebase/auth'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/EvilIcons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/SimpleLineIcons'
 import Icon4 from 'react-native-vector-icons/FontAwesome6'
-function ProfileSetting() {
+// import auth from '@react-native-firebase/auth'
+// import firestore from '@react-native-firebase/firestore'
+// import { useEffect, useState } from 'react';
+function ProfileSetting({navigation}) {
     
   // How to use Instagram
   const arr1 = [
@@ -19,7 +21,7 @@ function ProfileSetting() {
   // Who can see your content
   const arr2 = [
     {title: 'Account privacy', icon: 'lock'},
-    {title: 'Close Friends', icon: 'star-circle-outline'},
+    {title: 'Close Friends', icon: 'star-o'},
     {title: 'Blocked', icon: 'block-helper'},
     {title: 'Hide story and live', icon: 'block-helper'},
   ];
@@ -72,21 +74,23 @@ function ProfileSetting() {
     {title: 'Threads', icon: 'forum'},
     {title: 'Facebook', icon: 'facebook'},
   ];
+ 
+ 
 
   return (
       <ScrollView>
     <View style={{flex: 1, backgroundColor: 'black', marginTop: 30}}>
        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-        <Pressable style={{marginTop:15}}>
-            <Icon2 name='arrow-left' size={25} color={"white"}/>
+        <Pressable style={{marginTop:15}} onPress={()=>navigation.goBack()}>
+            <Icon2 name='arrow-left' size={23} color={"white"}/>
         </Pressable>
         <Text style={{marginTop:10,color:"white",fontSize:20}}>Settings and activity</Text>
        <Text></Text>
        </View>
        <View style={{alignSelf:"center"}}>
-<TextInput placeholder='Search' style={{backgroundColor:"#2d2d2d",borderWidth:1,borderColor:"#2d2d2d",marginTop:10,width:400,borderRadius:10}}/>
+<TextInput placeholder='Search'placeholderTextColor={"gray"}  style={{color:"white",marginBottom:3,backgroundColor:"#2d2d2d",borderWidth:1,borderColor:"#2d2d2d",marginTop:10,width:400,borderRadius:10}}/>
        </View>
-        <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+        <View style={{justifyContent: 'space-between', flexDirection: 'row',padding:8}}>
           <Text style={Styles.text}>Your account</Text>
           <Text style={{color:"#858585",fontWeight:500}}><Icon4 name='meta' color={"#858585"} size={15}/> Meta</Text>
         </View>
@@ -99,13 +103,13 @@ function ProfileSetting() {
             <Text></Text>
          </View>
          <View>
-         <Text style={{color:"white",fontSize:20}}>Accounts Center</Text>
+         <Text style={{color:"white",fontSize:20,padding:3}}>Accounts Center</Text>
          <Text style={Styles.text}>Password,Security,Personal details,
             ad prefences</Text>
          {/* <Text></Text> */}
          </View>
         </View>
-        <View style={{padding:7}}>
+        <View style={{padding:13}}>
             <Text style={Styles.text}>Manage your connected experiences and account
                 settings accross Meta technologies.
             </Text>
@@ -118,13 +122,13 @@ function ProfileSetting() {
         <Text style={Styles.text}>How to use Instagram</Text>
         </View>
         {arr1.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row',}}>
             <View
               key={index}
-              style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
+              style={{marginTop: 5, flexDirection: 'row', padding: 17}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -142,13 +146,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>Who can see your content</Text>
 </View>
         {arr2.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -167,13 +171,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>How others can interact with you</Text>
 </View>
         {arr3.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -192,13 +196,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>What you see</Text>
 </View>
         {arr4.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -217,13 +221,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>Your app and media</Text>
 </View>
         {arr5.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -242,13 +246,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>For families</Text>
 </View>
         {arr6.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -267,13 +271,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>For professionals</Text>
 </View>
         {arr7.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -292,13 +296,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>Your orders and fundraisers</Text>
 </View>
         {arr8.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -317,13 +321,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>More info and support</Text>
 </View>
         {arr9.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
@@ -342,13 +346,13 @@ function ProfileSetting() {
 <Text style={Styles.text}>Also from meta</Text>
 </View>
         {arr10.map((arr, index) => (
-          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View key={index} style={{justifyContent: 'space-between', flexDirection: 'row'}}>
              <View
               key={index}
               style={{marginTop: 5, flexDirection: 'row', padding: 10}}>
               <Icon
                 name={arr.icon}
-                size={25}
+                size={23}
                 color="white"
                 style={{marginRight: 10}}
               />
