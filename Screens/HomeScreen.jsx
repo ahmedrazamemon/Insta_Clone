@@ -25,8 +25,8 @@ function HomeScreen({navigation}) {
   return (
     <View style={style.container}>
       <Header navigation={navigation} />
-      <Stories />
       <ScrollView>
+      <Stories />
         {
         postData.length==0?<Loader size={"large"} color={"#FFF"} style={style.loader}/>:
         postData.map((post, index) => (

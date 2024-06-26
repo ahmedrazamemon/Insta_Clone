@@ -108,7 +108,7 @@ function ProfileDetails() {
           </Text>
           <TouchableOpacity>
             <Text style={{color: '#6BB0F5', fontVariant: 'bold'}}>
-              Add Your Bio
+              Add your bio
             </Text>
           </TouchableOpacity>
         </View>

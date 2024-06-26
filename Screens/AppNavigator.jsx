@@ -1,15 +1,12 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import HomeScreen from './HomeScreen';
 import NewPostScreen from './NewPostScreen';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
 import BottomNavigation from './BottomNavigation';
-// import DrawerNavigation from './DrawerNavigation';
-// import Drawer from './Drawer';
-// import HomeScreen from './HomeScreen';
 import ProfileSetting from '../Components/Profile/ProfileSetting';
+import UserDetails from '../Components/NewPost/UserDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +29,12 @@ export const SignInStack = () => {
           options={{headerShown: false}}
           component={ProfileSetting}
         />
+<Stack.Screen
+          name="UserDetails"
+          options={{headerShown: false}}
+          component={UserDetails}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

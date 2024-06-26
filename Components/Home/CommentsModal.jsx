@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {
@@ -17,15 +18,15 @@ import auth from '@react-native-firebase/auth';
 const CommentsModal = ({visible, onClose, post}) => {
   const [comment, setComment] = useState('');
   const [userdata, setuserdata] = useState([]);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
 
-  useEffect( () => {
+  useEffect(() => {
     userProfileData();
+    getComments();
     // console.log(posts[2],"posts data")
-    
   }, []);
-    const userProfileData = () => {
-    const user = auth().currentUser;
+  const user = auth().currentUser;
+  const userProfileData = () => {
     const unSubscribe = firestore()
       .collection('users')
       .where('userid', '==', user.uid)
@@ -71,7 +72,23 @@ const CommentsModal = ({visible, onClose, post}) => {
         });
     }
   };
-
+  const getComments=async ()=>{
+    await firestore()
+       .collection("users")
+       .doc(user.email)
+       .collection("posts")
+       .get()
+       .then(querySnapshot => {
+         querySnapshot.forEach(queryDocumentSnapshot => {
+           console.log("comments-----",queryDocumentSnapshot.get("comments"));
+           setPosts(queryDocumentSnapshot.get("comments"))
+           console.log("posts-----",posts)
+         });
+       })
+       .catch(err => {
+         alert(err);
+       });
+   }
   return (
     <Modal
       animationType="slide"
@@ -89,8 +106,21 @@ const CommentsModal = ({visible, onClose, post}) => {
             width: 400,
           }}>
           <Text style={styles.modalTitle}>Add your comment</Text>
-          <StandardButton title={'X'} onpress={onClose} style={styles.button} />
+          <StandardButton
+            title={'X'}
+            onpress={onClose}
+            style={styles.button}
+          />
         </View>
+        {/* {posts.length > 0 ? (
+        posts.map((post, index) => (
+          <View key={index}>
+            <Text>{post}</Text>
+          </View>
+        ))
+      ) : (
+        <Text>No comments found.</Text>
+      )} */}
         <View
           style={{marginTop: 20, flexDirection: 'row', alignItems: 'center'}}>
           <TextInput
@@ -111,7 +141,6 @@ const CommentsModal = ({visible, onClose, post}) => {
     </Modal>
   );
 };
-
 const styles = StyleSheet.create({
   input: {
     color: 'white',

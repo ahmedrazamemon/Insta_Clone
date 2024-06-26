@@ -13,7 +13,7 @@ function Cards() {
       .collection('users')
       .onSnapshot(snapshot => {
         setuserslist(
-          snapshot.docs.map(post => ({id: post.id, ...post.data()})),
+          snapshot.docs.map(data => ({id: data.id, ...data.data()})),
         );
       });
   }, []);

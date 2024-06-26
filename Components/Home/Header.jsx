@@ -15,9 +15,6 @@ function Header({navigation}) {
           />
         </TouchableOpacity>
         <View style={style.iconcontainer}>
-          <TouchableOpacity onPress={()=>navigation.navigate("NewPostScreen")}>
-            <Icon style={style.icon} name="plussquareo" size={25} />
-          </TouchableOpacity>
           <TouchableOpacity >
             <Icon style={style.icon} name="hearto" size={25} />
           </TouchableOpacity>
@@ -51,14 +48,14 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
-    marginLeft: 10,
+    marginLeft: 19,
     // resizeMode: 'contain',
     color: 'white',
   },
   unreadBadge: {
       backgroundColor: '#FF3250',
     position: 'absolute',
-    left: 20,
+    left: 25,
     bottom: 18,
     borderRadius: 25,
     width: 25,
