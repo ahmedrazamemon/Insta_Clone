@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {
@@ -8,24 +7,22 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  FlatList,
 } from 'react-native';
 import StandardButton from '../Button';
 import Icon from 'react-native-vector-icons/Feather';
 import auth from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
 
 const CommentsModal = ({visible, onClose, post}) => {
   const [comment, setComment] = useState('');
   const [userdata, setuserdata] = useState([]);
-  const [posts, setPosts] = useState();
+  const [PostData, setPostData] = useState([]);
 
   useEffect(() => {
     userProfileData();
-    getComments();
-    // console.log(posts[2],"posts data")
   }, []);
+
   const user = auth().currentUser;
+
   const userProfileData = () => {
     const unSubscribe = firestore()
       .collection('users')
@@ -34,13 +31,14 @@ const CommentsModal = ({visible, onClose, post}) => {
       .onSnapshot(snapshot => {
         snapshot.docs.map(doc => {
           setuserdata({
-            // userid:doc.data().userid,
             username: doc.data().username,
             profilePicture: doc.data().profilePicture,
             email: doc.data().email,
           });
         });
       });
+
+    return () => unSubscribe(); // Cleanup the subscription on component unmount
   };
 
   const uploadComment = () => {
@@ -50,10 +48,11 @@ const CommentsModal = ({visible, onClose, post}) => {
       comments: comment,
     };
 
-    if (comment.length == 0) {
+    if (comment.length === 0) {
       onClose();
-      console.log("can't add empty comment");
+      console.log("Can't add empty comment");
     } else {
+      console.log('Uploading comment to:', post.email, post.id);
       firestore()
         .collection('users')
         .doc(post.email)
@@ -63,32 +62,16 @@ const CommentsModal = ({visible, onClose, post}) => {
           comments: firestore.FieldValue.arrayUnion(newComment),
         })
         .then(async () => {
-          await onClose();
-          console.log('Document Updated');
+          onClose();
           setComment('');
+          console.log('Document Updated');
         })
         .catch(e => {
+          setComment('');
           console.log('Error ', e);
         });
     }
   };
-  const getComments=async ()=>{
-    await firestore()
-       .collection("users")
-       .doc(user.email)
-       .collection("posts")
-       .get()
-       .then(querySnapshot => {
-         querySnapshot.forEach(queryDocumentSnapshot => {
-           console.log("comments-----",queryDocumentSnapshot.get("comments"));
-           setPosts(queryDocumentSnapshot.get("comments"))
-           console.log("posts-----",posts)
-         });
-       })
-       .catch(err => {
-         alert(err);
-       });
-   }
   return (
     <Modal
       animationType="slide"
@@ -106,21 +89,22 @@ const CommentsModal = ({visible, onClose, post}) => {
             width: 400,
           }}>
           <Text style={styles.modalTitle}>Add your comment</Text>
-          <StandardButton
-            title={'X'}
-            onpress={onClose}
-            style={styles.button}
-          />
+          <StandardButton title={'X'} onpress={onClose} style={styles.button} />
         </View>
-        {/* {posts.length > 0 ? (
-        posts.map((post, index) => (
-          <View key={index}>
-            <Text>{post}</Text>
-          </View>
-        ))
-      ) : (
-        <Text>No comments found.</Text>
-      )} */}
+        <View>
+          {/*         
+        {
+
+          PostData.map((v,i)=>{
+            return(
+              <View>
+                <Text style={{color:"white"}}>{v}</Text>
+                </View>
+            )
+          })
+
+} */}
+        </View>
         <View
           style={{marginTop: 20, flexDirection: 'row', alignItems: 'center'}}>
           <TextInput

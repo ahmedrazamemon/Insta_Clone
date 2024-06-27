@@ -1,8 +1,8 @@
-import {Pressable, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import auth from '@react-native-firebase/auth'
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/EvilIcons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/SimpleLineIcons'
 import Icon4 from 'react-native-vector-icons/FontAwesome6'
 // import auth from '@react-native-firebase/auth'
@@ -12,44 +12,44 @@ function ProfileSetting({navigation}) {
     
   // How to use Instagram
   const arr1 = [
-    {title: 'Saved', icon: 'bookmark-o'},
-    {title: 'Archive', icon: 'archive'},
-    {title: 'Your Activity', icon: 'line-chart'},
-    {title: 'Notifications', icon: 'bell-o'},
-    {title: 'Time Spent', icon: 'clock-o'},
+    {title: 'Saved', icon: 'bookmark-outline'},
+    {title: 'Archive', icon: 'clock-check-outline'},
+    {title: 'Your Activity', icon: 'chart-timeline-variant'},
+    {title: 'Notifications', icon: 'bell-outline'},
+    {title: 'Time Spent', icon: 'clock-time-nine-outline'},
   ];
   // Who can see your content
   const arr2 = [
-    {title: 'Account privacy', icon: 'lock'},
-    {title: 'Close Friends', icon: 'star-o'},
+    {title: 'Account privacy', icon: 'lock-outline'},
+    {title: 'Close Friends', icon: 'star-circle-outline'},
     {title: 'Blocked', icon: 'block-helper'},
-    {title: 'Hide story and live', icon: 'block-helper'},
+    {title: 'Hide story and live', icon: 'progress-clock'},
   ];
   // How others can interact with you
   const arr3 = [
-    {title: 'Messages and story replies', icon: 'message-reply'},
+    {title: 'Messages and story replies', icon: 'facebook-messenger'},
     {title: 'Tags and mentions', icon: 'tag'},
-    {title: 'Comments', icon: 'comment'},
-    {title: 'Sharing and remixes', icon: 'share'},
-    {title: 'Restricted', icon: 'account-off'},
-    {title: 'Limit interactions', icon: 'account-minus'},
+    {title: 'Comments', icon: 'comment-outline'},
+    {title: 'Sharing and remixes', icon: 'share-variant'},
+    {title: 'Restricted', icon: 'account-cancel-outline'},
+    {title: 'Limit interactions', icon: 'account-alert-outline'},
     {title: 'Hidden words', icon: 'eye-off'},
-    {title: 'Follow and invite friends', icon: 'account-plus'},
+    {title: 'Follow and invite friends', icon: 'account-plus-outline'},
   ];
   // What you see
   const arr4 = [
-    {title: 'Favorites', icon: 'heart'},
-    {title: 'Muted accounts', icon: 'volume-mute'},
-    {title: 'Suggested content', icon: 'thumbs-up'},
-    {title: 'Like and share counts', icon: 'thumbs-up-down'},
+    {title: 'Favorites', icon: 'star-outline'},
+    {title: 'Muted accounts', icon: 'bell-off-outline'},
+    {title: 'Suggested content', icon: 'vector-union'},
+    {title: 'Like and share counts', icon: 'cards-heart-outline'},
   ];
   // Your app and media
   const arr5 = [
-    {title: 'Device permission', icon: 'devices'},
-    {title: 'Archiving and downloading', icon: 'download'},
-    {title: 'Accessibility', icon: 'accessible'},
+    {title: 'Device permission', icon: 'cellphone'},
+    {title: 'Archiving and downloading', icon: 'download-outline'},
+    {title: 'Accessibility', icon: 'access-point'},
     {title: 'Language', icon: 'language'},
-    {title: 'Data usage and media quality', icon: 'data-usage'},
+    {title: 'Data usage and media quality', icon: 'signal-cellular-outline'},
     {title: 'Website permission', icon: 'web'},
   ];
   // For families
@@ -63,16 +63,16 @@ function ProfileSetting({navigation}) {
   const arr8 = [{title: 'Orders and payments', icon: 'credit-card'}];
   // More info and support
   const arr9 = [
-    {title: 'Help', icon: 'help-circle'},
-    {title: 'Privacy center', icon: 'shield'},
-    {title: 'Account status', icon: 'account-check'},
-    {title: 'About', icon: 'information'},
+    {title: 'Help', icon: 'help-circle-outline'},
+    {title: 'Privacy center', icon: 'shield-account-variant-outline'},
+    {title: 'Account status', icon: 'account-check-outline'},
+    {title: 'About', icon: 'information-outline'},
   ];
   // Also from Meta
   const arr10 = [
     {title: 'WhatsApp', icon: 'whatsapp'},
-    {title: 'Threads', icon: 'forum'},
-    {title: 'Facebook', icon: 'facebook'},
+    {title: 'Threads', icon: 'forum-outline'},
+    {title: 'Facebook', icon: 'facebook-outline'},
   ];
  
  
@@ -82,7 +82,7 @@ function ProfileSetting({navigation}) {
     <View style={{flex: 1, backgroundColor: 'black', marginTop: 30}}>
        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
         <Pressable style={{marginTop:15}} onPress={()=>navigation.goBack()}>
-            <Icon2 name='arrow-left' size={23} color={"white"}/>
+            <Icon name='arrow-left' size={23} color={"white"}/>
         </Pressable>
         <Text style={{marginTop:10,color:"white",fontSize:20}}>Settings and activity</Text>
        <Text></Text>
@@ -107,7 +107,11 @@ function ProfileSetting({navigation}) {
          <Text style={Styles.text}>Password,Security,Personal details,
             ad prefences</Text>
          {/* <Text></Text> */}
+
          </View>
+         <TouchableOpacity onPress={()=>navigation.navigate("UserProfile")} style={{justifyContent:"center"}}>
+ <Icon3 name="arrow-right" size={20}  color={'#575555'} />
+         </TouchableOpacity>
         </View>
         <View style={{padding:13}}>
             <Text style={Styles.text}>Manage your connected experiences and account

@@ -6,7 +6,9 @@ import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
 import BottomNavigation from './BottomNavigation';
 import ProfileSetting from '../Components/Profile/ProfileSetting';
-import UserDetails from '../Components/NewPost/UserDetails';
+import UserDetails from '../Components/NewPost/ExploreScreen';
+import ExploreScreen from '../Components/NewPost/ExploreScreen';
+import UserProfile from '../Components/Profile/UserProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,9 +32,16 @@ export const SignInStack = () => {
           component={ProfileSetting}
         />
 <Stack.Screen
-          name="UserDetails"
+          name="UserProfile"
           options={{headerShown: false}}
-          component={UserDetails}
+          component={UserProfile}
+        />
+
+
+<Stack.Screen
+          name="ExploreScreen"
+          options={{headerShown: false}}
+          component={ExploreScreen}
         />
 
       </Stack.Navigator>

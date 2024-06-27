@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Users} from '../../data/Users';
+// import {Users} from '../../data/Users'/;
+import Icon from 'react-native-vector-icons/FontAwesome'
 import ImageComponent from '../Images';
 import firestore from '@react-native-firebase/firestore'
 function Stories() {
@@ -17,7 +18,12 @@ function Stories() {
   },[])
   return (
     <View>
+   
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {/* <View style={style.mystory}> */}
+
+   {/* <Icon name="user-o" size={50} color={"white"} /> */}
+        {/* </View> */}
         {userslist.map((value,index) => (
           <View key={index} style={{alignItems:"center"}}>
             <ImageComponent source={{uri:value.profilePicture}} style={style.image} />
@@ -41,5 +47,17 @@ const style = StyleSheet.create({
    marginLeft: 11,
    borderWidth: 3,
    borderColor: '#FF8501'
+  }
+  ,mystory:{
+    marginTop:4,
+    alignItems:"center",
+    justifyContent:"center",
+    width: 70,
+    height: 70,
+    borderRadius: 50,
+    marginLeft: 11,
+    borderWidth: 3,
+    backgroundColor:"gray",
+    borderColor: 'white' 
   }
 });

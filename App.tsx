@@ -3,6 +3,7 @@ import { Platform, SafeAreaView, StatusBar, StyleSheet, Text } from "react-nativ
 import { AvoidSoftInput } from "react-native-avoid-softinput";
 import AuthNavigation from "./Screens/AuthNavigation";
 import COLORS from './Colors';
+import { LogBox } from "react-native";
 import BottomNavigation from "./Screens/BottomNavigation";
 import 'react-native-gesture-handler';
 export default function App(){
@@ -15,13 +16,15 @@ export default function App(){
       AvoidSoftInput.setShouldMimicIOSBehavior(false);
     }
   }, []);	
-
+  LogBox.ignoreAllLogs();//Ignore all log notifications
+  // console.ignoredYellowBox
   return(
     <SafeAreaView style={style.container}>
             <StatusBar
           barStyle={Platform.OS == 'ios' ? 'dark-content' : 'light-content'}
           backgroundColor={COLORS.primary}
           />
+
           <AuthNavigation/>
           {/* <BottomNavigation/> */}
    </SafeAreaView>

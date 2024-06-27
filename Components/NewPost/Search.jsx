@@ -46,6 +46,8 @@ function Search({navigation}) {
               email: item.email,
               imgUrl: item.imgurl,
               profilepicture:item.profilePicture,
+              comment:item.comments,
+              likes:item.likesbyuser
             })}>
               <ImageComponent
                 source={{ uri: item.imgurl }}
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
   image: {
     resizeMode:"contain",
     borderColor:"white",
-    borderWidth:2,
+    borderWidth:1,
     width:130, 
     height: 180,
     borderRadius: 4,
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignContent:"center",
-    padding: 3,
+    padding: 1,
     // margin:5,
     alignSelf:"center"
 },

@@ -100,7 +100,7 @@ const PostImage = ({post}) => {
       {post.imgurl ? (
         <Image
           source={{uri: post.imgurl}}
-          style={{resizeMode: 'cover', height: '100%', width: '100%'}}
+          style={{resizeMode: 'contain', height: '100%', width: '100%'}}
         />
       ) : (
         <Loader color={'white'} size={20} style={styles.loader} />
@@ -109,7 +109,7 @@ const PostImage = ({post}) => {
   );
 };
 
-const FooterIcons = ({handleLike, post,openComments}) => {
+export const FooterIcons = ({handleLike, post,openComments}) => {
   const iconNames = ['heart', 'heart-o', 'message-circle', 'send-o', 'bookmark-o'];
   return (
     <View style={styles.container}>

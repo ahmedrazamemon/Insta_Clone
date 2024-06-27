@@ -1,10 +1,11 @@
 import {ErrorMessage, Formik} from 'formik';
 import React, {useEffect, useState} from 'react';
-import {Button, Image, Text, TextInput, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Divider} from 'react-native-elements';
 import * as Yup from 'yup';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import Loader from '../Loader';
 const PostUploadSchema = Yup.object().shape({
   imageUrl: Yup.string().url().required('Url is Required'),
   caption: Yup.string()
@@ -17,6 +18,7 @@ function FormikPostUploader({navigation}) {
 
   const [thumbNailUrl, setthumbNailUrl] = useState(Img_PlaceHolder);
   const [currentLoggedInUser, setcurrentLoggedInUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getUserName = () => {
     const user = auth().currentUser;
@@ -43,6 +45,7 @@ function FormikPostUploader({navigation}) {
   }, []);
 
   const postUploader = (imgurl, caption) => {
+    setLoading(true)
     const user = auth().currentUser;
     firestore()
       .collection('users')
@@ -59,14 +62,20 @@ function FormikPostUploader({navigation}) {
         likes: 0,
         comments: [],
         likesbyuser: [],
+        followers:[],
+        following:[],
+        sevedposts:[]
       })
       .then(() => {
+        setLoading(false)
         console.log('Data Added');
         navigation.goBack();
       })
       .catch(error => {
+        setLoading(false)
         console.error('Error adding document:', error);
-      });
+      });  
+    
   };
   return (
     <Formik
@@ -116,13 +125,26 @@ function FormikPostUploader({navigation}) {
           <Text style={{color: 'red', fontWeight: '400'}}>
             <ErrorMessage name={'imageUrl'} />
           </Text>
+          {
+            loading?<Loader style={Styles.button} size={"small"} color={"#FFF"}/>:
           <Button
-            onPress={handleSubmit}
-            title="share"
-            disabled={!isValid}></Button>
+          onPress={handleSubmit}
+          title="share"
+          disabled={!isValid}></Button>
+        }
         </>
       )}
     </Formik>
   );
 }
 export default FormikPostUploader;
+
+const Styles= StyleSheet.create({
+  button: {
+    backgroundColor: '#6AA0F5',
+    minHeight: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+})
