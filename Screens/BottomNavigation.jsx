@@ -31,6 +31,7 @@ export default function BottomNavigation() {
             return <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color} />;
           }
         },
+        tabBarShowLabel:false,
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'white',
       })}

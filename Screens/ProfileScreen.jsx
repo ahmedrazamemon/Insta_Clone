@@ -9,7 +9,7 @@ function ProfileScreen({navigation}){
     return(
         <View style={Styles.container} >
             <Header navigation={navigation}/>
-            <ProfileDetails/>
+            <ProfileDetails navigation={navigation}/>
       <Cards/>     
         </View>
     )

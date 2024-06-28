@@ -39,7 +39,7 @@ function Search({navigation}) {
                 renderItem={({ item }) => (
 
           <View style={styles.container}>
-           <TouchableOpacity onPress={() => navigation.navigate("UserDetails", {
+           <TouchableOpacity onPress={() => navigation.navigate("ExploreScreen", {
               id: item.uid,
               UserName:item.username,
               caption: item.caption,

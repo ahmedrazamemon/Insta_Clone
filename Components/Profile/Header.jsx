@@ -8,9 +8,9 @@ function Header({navigation}) {
     <>
       <View style={Styles.container}>
         <View>
-          <Text style={{color: 'white', fontWeight: 700}}>{auth().currentUser.email}</Text>
+          <Text style={{color: 'white', fontWeight: 700,}}>{auth().currentUser.email}</Text>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row',justifyContent:"space-between",width:120}}>
           <TouchableOpacity>
             <Icon2
               style={Styles.iconcontainer}

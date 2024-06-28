@@ -9,6 +9,7 @@ import ProfileSetting from '../Components/Profile/ProfileSetting';
 import UserDetails from '../Components/NewPost/ExploreScreen';
 import ExploreScreen from '../Components/NewPost/ExploreScreen';
 import UserProfile from '../Components/Profile/UserProfile';
+import EditProfile from '../Components/Profile/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,11 @@ export const SignInStack = () => {
           component={ExploreScreen}
         />
 
+<Stack.Screen
+          name="EditProfile"
+          options={{headerShown: false}}
+          component={EditProfile}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

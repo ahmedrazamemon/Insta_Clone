@@ -11,6 +11,7 @@ import Stories from '../Components/Home/Stories';
 import Posts from '../Components/Home/Post';
 import firestore from '@react-native-firebase/firestore';
 import Loader from '../Components/Loader';
+import Cards from '../Components/Profile/Cards';
 // import BottomNavigation from './BottomNavigation';
 function HomeScreen({navigation}) {
   const [postData, setpostData] = useState([]);

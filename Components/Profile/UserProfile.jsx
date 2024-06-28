@@ -8,12 +8,12 @@ import auth from '@react-native-firebase/auth';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 
-function UserProfile() {
+function UserProfile({navigation}) {
   return (
     <View style={{flex: 1, backgroundColor: 'rgb(29 50 67)'}}>
-      <Header />
+      <Header  navigation={navigation}/>
       <ScrollView>
-        <Body />
+        <Body navigation={navigation} />
       </ScrollView>
     </View>
   );
@@ -127,7 +127,7 @@ const Item = ({title, icon}) => (
   </View>
 );
 
-const Header = () => {
+const  Header = ({navigation}) => {
   return (
     <View>
       <View
@@ -138,7 +138,7 @@ const Header = () => {
             alignItems: 'center',
             padding: 10,
           }}>
-        <Icon1 name="x" size={30} color={'white'} />
+        <Icon1 name="x" size={30} color={'white'} onPress={()=>navigation.goBack()}/>
         <Text style={styles.text}>
           <Icon name="meta" color={'white'} size={15} /> Meta
         </Text>

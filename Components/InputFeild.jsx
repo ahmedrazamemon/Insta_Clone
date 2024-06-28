@@ -11,12 +11,14 @@ const InputField = ({
   onChangeText,
   placeholdercolor,
   error,
+  style
 }) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputField}>
+      <View>
         <TextInput
+        style={style}
           placeholder={placeholder}
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}

@@ -44,10 +44,36 @@ const handleLike = post => {
       });
   };
 
+
+  
+const handleFollow = post => {
+  const currentfollowstatus = !post.followers.includes(
+    auth().currentUser.email,
+  );
+
+  firestore()
+    .collection('users')
+    .doc(post.email)
+    .collection('posts')
+    .doc(post.id)
+    .update({
+      followers: currentfollowstatus
+        ? firestore.FieldValue.arrayUnion(auth().currentUser.email)
+        : firestore.FieldValue.arrayRemove(auth().currentUser.email),
+    })
+    .then(() => {
+      console.log('Document Updated');
+    })
+    .catch(e => {
+      console.log('Error ', e);
+    });
+};
+
+
   return (
     <View style={{marginBottom: 30}}>
       {/* <Divider width={1} orientation="vertical" /> */}
-      <PostHeader post={post} />
+      <PostHeader post={post} handleFollow={handleFollow} />
       <PostImage post={post} />
       <View style={{marginHorizontal: 15, marginTop: 10}}>
         <FooterIcons post={post} openComments={openComments} handleLike={handleLike} />
@@ -68,7 +94,7 @@ const handleLike = post => {
   );
 }
 
-const PostHeader = ({post}) => {
+const PostHeader = ({post,handleFollow}) => {
   return (
     <View
       style={{
@@ -83,9 +109,19 @@ const PostHeader = ({post}) => {
         <Text style={styles.name}>{post.username}</Text>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'space-between',alignItems:"center"}}>
-        <Pressable style={styles.button}>
+      {/* <TouchableOpacity > */}
+          {post.followers.includes(auth().currentUser.email) ? (
+           <TouchableOpacity style={styles.button} onPress={()=>handleFollow()}>
+           <Text style={{color: 'black', fontWeight: 500}}>Following</Text>
+         </TouchableOpacity>
+         ) : (
+          <Pressable style={styles.button} onPress={()=>handleFollow()}>
           <Text style={{color: 'black', fontWeight: 500}}>Follow</Text>
         </Pressable>
+          )}
+        {/* </TouchableOpacity> */}
+
+       
         <Pressable>
           <Icon1 name="dots-three-vertical" size={18} color={'white'} />
         </Pressable>

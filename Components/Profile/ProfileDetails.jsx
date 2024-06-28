@@ -10,7 +10,7 @@ import {
   ALERT_TYPE,
   Toast,
 } from 'react-native-alert-notification';
-function ProfileDetails() {
+function ProfileDetails({navigation}) {
   const [userdata, setuserdata] = useState([]);
 
   const [posts, setPosts] = useState([]);
@@ -120,7 +120,7 @@ function ProfileDetails() {
             marginTop: 10,
           }}>
           <View>
-            <StandardButton style={style.button} title={'Edit profile'} />
+            <StandardButton style={style.button} title={'Edit profile'} onpress={()=>navigation.navigate("EditProfile")}/>
           </View>
           <View>
             <StandardButton style={style.button} title={'Share profile'} />

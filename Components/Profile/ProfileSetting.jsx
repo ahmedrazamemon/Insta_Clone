@@ -28,7 +28,7 @@ function ProfileSetting({navigation}) {
   // How others can interact with you
   const arr3 = [
     {title: 'Messages and story replies', icon: 'facebook-messenger'},
-    {title: 'Tags and mentions', icon: 'tag'},
+    {title: 'Tags and mentions', icon: 'tag-outline'},
     {title: 'Comments', icon: 'comment-outline'},
     {title: 'Sharing and remixes', icon: 'share-variant'},
     {title: 'Restricted', icon: 'account-cancel-outline'},
@@ -48,12 +48,12 @@ function ProfileSetting({navigation}) {
     {title: 'Device permission', icon: 'cellphone'},
     {title: 'Archiving and downloading', icon: 'download-outline'},
     {title: 'Accessibility', icon: 'access-point'},
-    {title: 'Language', icon: 'language'},
+    // {title: 'Language', icon: 'language'},
     {title: 'Data usage and media quality', icon: 'signal-cellular-outline'},
     {title: 'Website permission', icon: 'web'},
   ];
   // For families
-  const arr6 = [{title: 'Supervision', icon: 'account-supervisor'}];
+  const arr6 = [{title: 'Supervision', icon: 'account-supervisor-outline'}];
   // For professionals
   const arr7 = [
     {title: 'Account type and tools', icon: 'toolbox'},
@@ -72,7 +72,7 @@ function ProfileSetting({navigation}) {
   const arr10 = [
     {title: 'WhatsApp', icon: 'whatsapp'},
     {title: 'Threads', icon: 'forum-outline'},
-    {title: 'Facebook', icon: 'facebook-outline'},
+    {title: 'Facebook', icon: 'facebook'},
   ];
  
  

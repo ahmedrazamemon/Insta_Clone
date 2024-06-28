@@ -89,6 +89,7 @@ function SignupForm({navigation}) {
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
             <InputField
+          style={Styles.inputField}
                 label={"user name"}
                 placeholder={"user name"}
                 value={values.username}
@@ -98,6 +99,7 @@ function SignupForm({navigation}) {
               />
               
            <InputField
+          style={Styles.inputField}
            label={"email"}
            placeholder={"email"}
            value={values.email}
@@ -106,6 +108,7 @@ function SignupForm({navigation}) {
            error={<ErrorMessage name='email'/>}
            />
           <InputField
+          style={Styles.inputField}
           label={"password"}
           placeholder={"password"}
           value={values.password}
@@ -141,14 +144,14 @@ function SignupForm({navigation}) {
 export default SignupForm;
 
 const Styles = StyleSheet.create({
-  inputFeild: {
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: '#FAFAFA',
-    marginBottom: 20,
-    borderWidth: 1,
-    borderRadius: 20,
-  },
+  // inputFeild: {
+  //   borderRadius: 4,
+  //   padding: 10,
+  //   backgroundColor: '#FAFAFA',
+  //   marginBottom: 20,
+  //   borderWidth: 1,
+  //   borderRadius: 20,
+  // },
   wrapper: {
     marginTop: 50,
     flex: 2,
@@ -166,6 +169,15 @@ const Styles = StyleSheet.create({
     borderRadius: 10,
     width:400
     // borderWidth:1
+},
+inputField: {
+  height:60,
+  borderRadius: 4,
+  padding: 10,
+  backgroundColor: '#FAFAFA',
+  marginBottom: 20,
+  borderWidth: 1,
+  borderRadius: 20,
 },
     
   errormessage: {

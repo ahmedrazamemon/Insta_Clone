@@ -107,6 +107,7 @@ function LoginForm({ navigation }) {
           <AlertNotificationRoot>
             <View style={Styles.wrapper}>
               <InputField
+              style={Styles.inputField}
                 label="Email"
                 placeholder="email"
                 keyboardType="email-address"
@@ -116,6 +117,7 @@ function LoginForm({ navigation }) {
                 error={<ErrorMessage name="email" />}
               />
               <InputField
+              style={Styles.inputField}
                 label="Password"
                 placeholder="password"
                 secureTextEntry
@@ -162,6 +164,15 @@ const Styles = StyleSheet.create({
   wrapper: {
     marginTop: 50,
     flex: 2,
+  },
+  inputField: {
+    height:60,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#FAFAFA',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderRadius: 20,
   },
   SignupContainer: {
     flexDirection: 'row',
