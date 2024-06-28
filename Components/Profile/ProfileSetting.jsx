@@ -92,7 +92,7 @@ function ProfileSetting({navigation}) {
        </View>
         <View style={{justifyContent: 'space-between', flexDirection: 'row',padding:8}}>
           <Text style={Styles.text}>Your account</Text>
-          <Text style={{color:"#858585",fontWeight:500}}><Icon4 name='meta' color={"#858585"} size={15}/> Meta</Text>
+          <Text style={{color:"white"}}><Icon4 name='meta' color={"white"} size={15}/> Meta</Text>
         </View>
      
      
@@ -390,6 +390,6 @@ export default ProfileSetting;
 const Styles = StyleSheet.create({
   text: {
     color: 'gray',
-    fontWeight:700
+    // fontWeight:700
   },
 });
