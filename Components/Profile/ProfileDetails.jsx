@@ -120,7 +120,7 @@ function ProfileDetails({navigation}) {
             marginTop: 10,
           }}>
           <View>
-            <StandardButton style={style.button} title={'Edit profile'} onpress={()=>navigation.navigate("EditProfile")}/>
+            <StandardButton style={style.button} title={'Edit profile'} onPress={()=>navigation.navigate("EditProfile")}/>
           </View>
           <View>
             <StandardButton style={style.button} title={'Share profile'} />

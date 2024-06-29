@@ -43,7 +43,7 @@ function EditProfile({navigation}) {
       <Header navigation={navigation} title={'Edit Profile'} backArrow />
       <AvatarImage />
       <Inputfeild userdata={userdata} />
-        <DropDown title={"1"} val={"1"}/>
+        <DropDown/>
     </View>
   );
 }

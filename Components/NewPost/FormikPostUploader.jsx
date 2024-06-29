@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import Loader from '../Loader';
+import StandardButton from '../Button';
 const PostUploadSchema = Yup.object().shape({
   imageUrl: Yup.string().url().required('Url is Required'),
   caption: Yup.string()
@@ -126,12 +127,13 @@ function FormikPostUploader({navigation}) {
             <ErrorMessage name={'imageUrl'} />
           </Text>
           {
-            loading?<Loader style={Styles.button} size={"small"} color={"#FFF"}/>:
-          <Button
+            loading?<Loader style={Styles.loader} size={"small"} color={"#FFF"}/>:
+          <StandardButton
           onPress={handleSubmit}
+          style={Styles.button}
           title="share"
-          disabled={!isValid}></Button>
-        }
+          disabled={!isValid}/>
+                  }
         </>
       )}
     </Formik>
@@ -147,4 +149,11 @@ const Styles= StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
   },
+  button: {
+    backgroundColor: '#6AA0F5',
+    minHeight: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  }
 })

@@ -79,10 +79,10 @@ function ProfileSetting({navigation}) {
 
   return (
       <ScrollView>
-    <View style={{flex: 1, backgroundColor: 'black', marginTop: 30}}>
+    <View style={{flex: 1, backgroundColor: 'black',}}>
        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-        <Pressable style={{marginTop:15}} onPress={()=>navigation.goBack()}>
-            <Icon name='arrow-left' size={23} color={"white"}/>
+        <Pressable style={{marginTop:15,width:35,borderWidth:1,borderColor:"red"}} onPress={()=>navigation.goBack()}>
+            <Icon4 name='arrow-left-long' size={23} color={"white"}/>
         </Pressable>
         <Text style={{marginTop:10,color:"white",fontSize:20}}>Settings and activity</Text>
        <Text></Text>

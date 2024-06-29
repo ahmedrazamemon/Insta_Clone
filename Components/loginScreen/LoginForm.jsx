@@ -143,7 +143,7 @@ function LoginForm({ navigation }) {
                   style={Styles.button}
                 />
               ) : (
-                <StandardButton title={'Login'} style={Styles.button} onpress={handleSubmit} />
+                <StandardButton title={'Login'} style={Styles.button} onPress={handleSubmit} />
               )}
               <View style={Styles.SignupContainer}>
                 <Text>Don't have an account?</Text>

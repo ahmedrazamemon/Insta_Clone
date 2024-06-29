@@ -124,7 +124,7 @@ function SignupForm({navigation}) {
                   style={Styles.button}
                 />
               ) : (
-                <StandardButton title={"Signup"} style={Styles.button} onpress={handleSubmit}/>
+                <StandardButton title={"Signup"} style={Styles.button} onPress={handleSubmit}/>
 
               )}
 
