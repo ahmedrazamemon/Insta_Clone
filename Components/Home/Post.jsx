@@ -79,7 +79,7 @@ const handleFollow = post => {
         <FooterIcons post={post} openComments={openComments} handleLike={handleLike} />
         <Likes post={post} />
         <Caption post={post} />
-        {/* <CommentsSection post={post} /> */}
+        <CommentsSection post={post} />
         {/* <Comments post={post} /> */}
         <CommentsModal
   post={post}
@@ -209,19 +209,19 @@ const Caption = ({post}) => {
     </View>
   );
 };
-// const CommentsSection = ({post}) => {
-//   return (
-//     <View>
-//       {!!post.comments.length && (
-//         <Text style={{color: 'gray'}}>
-//           View {post.comments.length > 1 ? 'all' : ''} {post.comments.length}{' '}
-//           {''}
-//           {post.comments.length > 1 ? 'comments' : 'comment'}
-//         </Text>
-//       )}
-//     </View>
-//   );
-// };
+const CommentsSection = ({post}) => {
+  return (
+    <View>
+      {!!post.comments.length && (
+        <Text style={{color: 'gray'}}>
+          View {post.comments.length > 1 ? 'all' : ''} {post.comments.length}{' '}
+          {''}
+          {post.comments.length > 1 ? 'comments' : 'comment'}
+        </Text>
+      )}
+    </View>
+  );
+};
 
 // // const Comments = ({post}) => {
 // //   return (

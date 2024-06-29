@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/FontAwesome6'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import StandardButton from '../Button';
 import Loader from '../Loader';
 import InputField from '../InputFeild';
 import DropDown from '../SignupScreen/DropDown';
@@ -36,7 +36,7 @@ function EditProfile({navigation}) {
       });
   };
 
-//   console.log("userdata---", userdata);
+  // console.log("userdata---", userdata);
 
   return (
     <View style={{flex: 1, backgroundColor: 'black', marginTop: 30}}>
@@ -50,12 +50,13 @@ function EditProfile({navigation}) {
 
 const Header = ({navigation, title, backArrow}) => {
   return (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      {backArrow && (
-        <Pressable style={{marginTop: 15}} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={23} color={'white'} />
+    
+    
+        <View style={{flexDirection: 'row', alignItems: 'center',justifyContent:"space-between",borderWidth:1,borderColor:"red"}}>
+        <View style={{flexDirection:"row",alignItems:"center"}}>
+        <Pressable style={{marginTop:5}} onPress={() => navigation.goBack()}>
+          <Icon2 name="arrow-left-long" size={23} color={'white'} />
         </Pressable>
-      )}
       <Text
         style={{
           marginTop: 10,
@@ -66,12 +67,51 @@ const Header = ({navigation, title, backArrow}) => {
         }}>
         {title}
       </Text>
-      <Text></Text>
-    </View>
+          </View>
+      <View>
+        <Icon name='check' color={"white"} size={30}/>
+      </View>
+      </View>
+    
   );
 };
 
 const Inputfeild = ({userdata}) => {
+
+const [newName,setNewName] = useState('')
+const [newEmail,setNewEmail] = useState('')
+const updateUserData = async () => {
+  try {
+      const userDoc = await firestore()
+      .collection('users')
+      .doc(auth().currentUser.email)
+      .get();
+
+    if (userDoc.exists) {
+      const updates = {};
+
+        if (newName) {
+        updates.username = newName;
+      }
+      if (newEmail) {
+        updates.email = newEmail;
+      }
+
+        await firestore()
+        .collection('users')
+        .doc(auth().currentUser.email)
+        .update(updates);
+
+      console.log('User updated!');
+    } else {
+      console.log('User does not exist!');
+    }
+  } catch (error) {
+    console.error('Error updating user: ', error);
+  }
+};
+
+ 
   if (!userdata) {
     return <Loader size={"small"} color={"#FFF"} style={{justifyContent:"center"}}/>
   }
@@ -80,29 +120,34 @@ const Inputfeild = ({userdata}) => {
 
 <View style={{}}>
 <View style={Styles.container}>
-<Text style={{marginBottom:-10,marginLeft:5}}>Name</Text>
+<Text style={Styles.label}>Name</Text>
 <InputField
           style={Styles.inputField}
-          value={userdata.username}
+          onChangeText={(e)=>setNewName(e)}
+          // value={userdata.username}
+          placeholderTextColor="gray"
+          placeholder={userdata.username}
           
 />
     </View>
     <View style={Styles.container}>
-<Text style={{marginBottom:-10,marginLeft:5}}>Email</Text>
+<Text style={Styles.label}>Email</Text>
 <InputField
           style={Styles.inputField}
-          value={userdata.email}
-          
+          placeholder={userdata.email}
+          placeholderTextColor={"gray"} 
+          onChangeText={(e)=>setNewEmail(e)}         
 />
     </View>
     <View style={Styles.container}>
-<Text style={{marginBottom:-10,marginLeft:5}}>Pronouns</Text>
+<Text style={Styles.label}>Pronouns</Text>
     </View>
     <View style={Styles.container}>
-<Text style={{marginBottom:-10,marginLeft:5}}>Bio</Text>
+<Text style={Styles.label}>Bio</Text>
     </View>
     <Text style={Styles.text}>Add link</Text>
 
+{/* <StandardButton title={"Update"} onPress={()=>updateUserData()} style={Styles.button}/> */}
           </View>
   );
 };
@@ -164,9 +209,16 @@ const Styles = StyleSheet.create({
   },
   inputField: {
     marginTop:-23,
+    color:"white"
  
   },
- container:{margin:5,borderWidth: 1,height:70, borderColor: '#555',borderRadius:6,padding:10} 
+ container:{
+  margin:5,
+  borderWidth:1,
+  height:70,
+   borderColor: '#555',
+   borderRadius:6,
+   padding:10} 
 
  ,
  text:{
@@ -174,5 +226,18 @@ const Styles = StyleSheet.create({
     color:"white",
     fontWeight:500,
     padding:10
- }
+ },
+ label:
+ {marginBottom:-10,
+  color:"white",
+  marginLeft:5},
+  button: {
+    backgroundColor: '#6AA0F5',
+    minHeight: 43,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    width:400
+    // borderWidth:1
+},
 });

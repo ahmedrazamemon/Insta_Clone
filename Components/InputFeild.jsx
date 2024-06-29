@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
+import {View, TextInput, Text, StyleSheet} from 'react-native';
 
 const InputField = ({
   label,
@@ -9,16 +9,17 @@ const InputField = ({
   value,
   onBlur,
   onChangeText,
-  placeholdercolor,
+  placeholderTextColor,
   error,
-  style
+  style,
 }) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
       <View>
         <TextInput
-        style={style}
+          style={style}
+          placeholderTextColor={placeholderTextColor}
           placeholder={placeholder}
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}
@@ -26,7 +27,6 @@ const InputField = ({
           onBlur={onBlur}
           onChangeText={onChangeText}
           autoCapitalize="none"
-          
         />
       </View>
       {error && <Text style={styles.errorMessage}>{error}</Text>}

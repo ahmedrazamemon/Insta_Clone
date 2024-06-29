@@ -1,13 +1,9 @@
 import {Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import auth from '@react-native-firebase/auth'
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon3 from 'react-native-vector-icons/SimpleLineIcons'
 import Icon4 from 'react-native-vector-icons/FontAwesome6'
-// import auth from '@react-native-firebase/auth'
-// import firestore from '@react-native-firebase/firestore'
-// import { useEffect, useState } from 'react';
 function ProfileSetting({navigation}) {
     
   // How to use Instagram
@@ -80,8 +76,8 @@ function ProfileSetting({navigation}) {
   return (
       <ScrollView>
     <View style={{flex: 1, backgroundColor: 'black',}}>
-       <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-        <Pressable style={{marginTop:15,width:35,borderWidth:1,borderColor:"red"}} onPress={()=>navigation.goBack()}>
+       <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:30}}>
+        <Pressable style={{marginTop:15,width:35,}} onPress={()=>navigation.goBack()}>
             <Icon4 name='arrow-left-long' size={23} color={"white"}/>
         </Pressable>
         <Text style={{marginTop:10,color:"white",fontSize:20}}>Settings and activity</Text>
