@@ -77,7 +77,7 @@ const handleFollow = post => {
       <PostImage post={post} />
       <View style={{marginHorizontal: 15, marginTop: 10}}>
         <FooterIcons post={post} openComments={openComments} handleLike={handleLike} />
-        <Likes post={post} />
+          <Likes post={post} />
         <Caption post={post} />
         <CommentsSection post={post} />
         {/* <Comments post={post} /> */}

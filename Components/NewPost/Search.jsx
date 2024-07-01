@@ -4,6 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import ImageComponent from '../Images';
 import Loader from '../Loader';
 import { Text } from 'react-native-elements';
+import { TextInput } from 'react-native';
 
 function Search({navigation}) {
     const [postData, setpostData] = useState([]);
@@ -15,6 +16,7 @@ function Search({navigation}) {
           setpostData(snapshot.docs.map(post => ({id:post.id,...post.data()})));
         });
     }, []);
+    
 
 //   console.log("Images-------",postData.imgUrl)
   if (postData.length === 0) {
@@ -27,10 +29,9 @@ function Search({navigation}) {
 
   return (
     <View style={{ backgroundColor: 'black', flex: 1,marginTop:30 }}>
-
-        <View>
-            <Text style={{color:"white",textAlign:"center",fontSize:20}}>All Users</Text>
-        </View>
+  <View style={{alignSelf:"center",marginTop:10}}>
+<TextInput placeholder='Search'placeholderTextColor={"gray"}  style={{color:"white",marginBottom:3,backgroundColor:"#2d2d2d",borderWidth:1,borderColor:"#2d2d2d",marginTop:10,width:400,borderRadius:10}}/>
+       </View>
       <FlatList
       style={styles.container}
         data={postData}

@@ -1,4 +1,4 @@
-import {Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Pressable, ScrollView, StyleSheet, Text, TextInput, TextInputBase, TouchableOpacity, View} from 'react-native';
 import auth from '@react-native-firebase/auth'
 import Icon1 from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

@@ -6,6 +6,7 @@ import COLORS from './Colors';
 import { LogBox } from "react-native";
 import BottomNavigation from "./Screens/BottomNavigation";
 import 'react-native-gesture-handler';
+import EditProfile from "./Components/Profile/EditProfile";
 export default function App(){
   useEffect(() => {
     // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
@@ -24,8 +25,8 @@ export default function App(){
           barStyle={Platform.OS == 'ios' ? 'dark-content' : 'light-content'}
           backgroundColor={COLORS.primary}
           />
-
-          <AuthNavigation/>
+<EditProfile/>
+          {/* <AuthNavigation/> */}
           {/* <BottomNavigation/> */}
    </SafeAreaView>
   )

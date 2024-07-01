@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   View,
   Text,
@@ -12,12 +12,18 @@ import Icon1 from 'react-native-vector-icons/Entypo';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon4 from 'react-native-vector-icons/Feather';
 import ImageComponent from '../Images';
-// import firestore from '@react-native-firebase/firestore';
-// import auth from '@react-native-firebase/auth';
-// import {FooterIcons} from '../Home/Post';
+
 function ExploreScreen({route, navigation}) {
   const data = ({caption, comment, imgUrl, UserName, email, profilepicture,likes} =route.params);
+  const [currentComments, setCurrentComments] = useState([]);
+const [modalVisible, setModalVisible] = useState(false);
 
+
+  const openComments = (comments) => {
+    setCurrentComments(comments);
+    setModalVisible(true);
+  };
+  
   // console.log("data====",data)
   return (
     <View style={styles.container}>
@@ -31,9 +37,10 @@ function ExploreScreen({route, navigation}) {
       </View>
       <View style={{marginTop: 10}}></View>
       <Header data={data} />
-      <PostImage data={data} />
-      <Footer data={data} />
+      <PostImage data={data}  />
+      <Footer data={data}  openComments={openComments}/>
       <Caption data={data}/>
+      
     </View>
   );
 }
@@ -71,7 +78,7 @@ const Header = ({data}) => {
   );
 };
 
-const PostImage = ({data}) => {
+const PostImage = ({data,}) => {
   return (
     <View style={{width: '100%', height: 250}}>
       <ImageComponent source={{uri: data.imgUrl}} style={styles.img} />
@@ -79,7 +86,7 @@ const PostImage = ({data}) => {
   );
 };
 
-const Footer = ({data}) => {
+const Footer = ({data,openComments}) => {
   const iconNames = [
     'heart',
     'heart-o',

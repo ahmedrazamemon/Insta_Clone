@@ -17,6 +17,7 @@ import {
 } from 'react-native-alert-notification';
 import StandardButton from '../Button';
 import InputField from '../InputFeild'; // Update the path as necessary
+import Loader from '../Loader';
 
 // Yup Schema
 const LoginFormSchema = Yup.object().shape({
@@ -137,7 +138,7 @@ function LoginForm({ navigation }) {
                 </TouchableOpacity>
               </View>
               {loading ? (
-                <ActivityIndicator
+                <Loader 
                   size="small"
                   color={'#FFF'}
                   style={Styles.button}
