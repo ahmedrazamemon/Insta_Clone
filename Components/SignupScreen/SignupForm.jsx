@@ -59,7 +59,7 @@ function SignupForm({navigation}) {
           userid: res.user.uid,
           username,
           email,
-          profilePicture: await getRandomProfilePicture(),
+          profilePicture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF0QxSZCjz-8JefhrJrJwtL5i7utqDsRhv7Q&s",
         });
 
       console.log('User added!');
@@ -144,14 +144,7 @@ function SignupForm({navigation}) {
 export default SignupForm;
 
 const Styles = StyleSheet.create({
-  // inputFeild: {
-  //   borderRadius: 4,
-  //   padding: 10,
-  //   backgroundColor: '#FAFAFA',
-  //   marginBottom: 20,
-  //   borderWidth: 1,
-  //   borderRadius: 20,
-  // },
+  
   wrapper: {
     marginTop: 50,
     flex: 2,

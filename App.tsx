@@ -25,8 +25,8 @@ export default function App(){
           barStyle={Platform.OS == 'ios' ? 'dark-content' : 'light-content'}
           backgroundColor={COLORS.primary}
           />
-<EditProfile/>
-          {/* <AuthNavigation/> */}
+{/* <EditProfile/> */}
+          <AuthNavigation/>
           {/* <BottomNavigation/> */}
    </SafeAreaView>
   )
