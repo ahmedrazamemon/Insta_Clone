@@ -12,17 +12,19 @@ import ImagePicker from 'react-native-image-crop-picker';
 import ImageComponent from '../Images';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import storage from '@react-native-firebase/storage'
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 const PostUploadSchema = Yup.object().shape({
+  image:Yup.mixed().required("an image is required"),
   caption: Yup.string()
     .max(2200, 'Caption has reached charaters limit')
     .required('Caption is required'),
 });
 
 function FormikPostUploader({navigation}) {
-  const Img_PlaceHolder = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC_SwvwrfdVWZRJcmrwdq7wQIXNx59G4UdsA&s';
+  // const Img_PlaceHolder = ;
 
-  const [thumbNailUrl, setthumbNailUrl] = useState(Img_PlaceHolder);
+  const [thumbNailUrl, setthumbNailUrl] = useState(null);
   const [currentLoggedInUser, setcurrentLoggedInUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -51,11 +53,25 @@ function FormikPostUploader({navigation}) {
     return () => unsubscribe && unsubscribe(); 
   }, []);
 
+  
+  
   const postUploader = (caption) => {
+
     setLoading(true)
-    const user = auth().currentUser;
-    firestore()
-      .collection('users')
+if(thumbNailUrl==''){
+  Toast.show({
+    type: ALERT_TYPE.WARNING,
+    title: 'Email Required',
+    textBody: 'Please enter your email to reset your password',
+    autoClose: 1000,
+  });
+setLoading(false)
+}
+else{
+  setLoading(true)
+  const user = auth().currentUser;
+  firestore()
+  .collection('users')
       .doc(user.email)
       .collection('posts')
       .add({
@@ -77,14 +93,16 @@ function FormikPostUploader({navigation}) {
         setLoading(false)
         console.log('Data Added');
         navigation.goBack();
-        setthumbNailUrl(Img_PlaceHolder)
+        setthumbNailUrl('')
+        // setthumbNailUrl(Img_PlaceHolder)
       
       })
       .catch(error => {
         setLoading(false)
         console.error('Error adding document:', error);
       });  
-    
+      
+    }
   };
   const selectImage = () => {
     ImagePicker.openPicker({
@@ -180,8 +198,8 @@ function FormikPostUploader({navigation}) {
 
   return (
     <Formik
-      initialValues={{caption: ''}}
-      onSubmit={(values) =>postUploader(values.caption)}
+      initialValues={{caption: '',image:null}}
+      onSubmit={(values) =>postUploader(values.caption,values.image)}
       validationSchema={PostUploadSchema}
       validateOnMount={true}
     >
@@ -194,12 +212,15 @@ function FormikPostUploader({navigation}) {
               justifyContent: 'space-between',
             }}>
               <TouchableOpacity onPress={handleOpenModal}>
-            <ImageComponent
-              source={{uri: thumbNailUrl ? thumbNailUrl : Img_PlaceHolder}}
-              style={{width: 150, height: 150, resizeMode: 'contain'}}
-              />
+                {
+                  thumbNailUrl?
+                  <ImageComponent
+                    source={{uri: thumbNailUrl ? thumbNailUrl : Img_PlaceHolder}}
+                  style={{width: 150, height: 150, resizeMode: 'contain'}}
+                  />:
+                  <Icon name='image-outline' color={"white"} size={100}/>
+                }
               </TouchableOpacity>
-
             <View style={{flex: 1, margin: 12}}>
               <TextInput
                 placeholderTextColor={'gray'}
@@ -216,6 +237,9 @@ function FormikPostUploader({navigation}) {
             </View>
           </View>
           <Divider width={0.2} orientation="vertical" />
+          
+          {/* <Text style={{color: 'red', fontWeight: '300'}}> */}
+                {/* <ErrorMessage name='image'/></Text> */}
           {
             loading?<Loader style={Styles.loader} size={"small"} color={"#FFF"}/>:
           <StandardButton
@@ -227,7 +251,7 @@ function FormikPostUploader({navigation}) {
         <ImagePickerModal
         visible={isModalVisible}
         onCancel={handleCloseModal}
-        onGalleryPress={() => {
+          onGalleryPress={() => {
           selectImage();
           handleCloseModal();
         }}
@@ -315,4 +339,4 @@ const Styles= StyleSheet.create({
     padding: 10,
     width: '30%',
   },
-})
+}) 

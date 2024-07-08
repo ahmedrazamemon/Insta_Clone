@@ -86,7 +86,7 @@ const Body = () => {
             </Text>
             <Text></Text>
           </View>
-          <View style={{flexDirection: 'row',alignItems:"center", marginLeft: 80}}>
+          <View style={{flexDirection: 'row',alignItems:"center", marginLeft: 58}}>
             <Text style={{color: 'gray'}}>
               Review the accounts you have in {'\n'} this accounts center
             </Text>
@@ -136,9 +136,8 @@ const  Header = ({navigation}) => {
             justifyContent: 'space-between',
             marginTop: 40,
             alignItems: 'center',
-            padding: 10,
-          }}>
-        <Icon1 name="x" size={30} color={'white'} onPress={()=>navigation.goBack()}/>
+            padding: 10,         }}>
+        <Icon1 name="x" size={30} color={'white'} onPress={()=>navigation.goBack()} style={{width:30,padding:6,alignContent:"center"}}/>
         <Text style={styles.text}>
           <Icon name="meta" color={'white'} size={15} /> Meta
         </Text>

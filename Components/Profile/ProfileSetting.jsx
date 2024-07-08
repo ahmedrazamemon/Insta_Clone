@@ -1,4 +1,4 @@
-import {Pressable, ScrollView, StyleSheet, Text, TextInput, TextInputBase, TouchableOpacity, View} from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, TextInputBase, Pressable, View} from 'react-native';
 import auth from '@react-native-firebase/auth'
 import Icon1 from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -77,7 +77,7 @@ function ProfileSetting({navigation}) {
       <ScrollView>
     <View style={{flex: 1, backgroundColor: 'black',}}>
        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:30}}>
-        <Pressable style={{marginTop:15,width:35,}} onPress={()=>navigation.goBack()}>
+        <Pressable style={{marginTop:15,width:35,padding:5}} onPress={()=>navigation.goBack()}>
             <Icon4 name='arrow-left-long' size={23} color={"white"}/>
         </Pressable>
         <Text style={{marginTop:10,color:"white",fontSize:20}}>Settings and activity</Text>
@@ -91,6 +91,8 @@ function ProfileSetting({navigation}) {
           <Text style={{color:"white"}}><Icon4 name='meta' color={"white"} size={15}/> Meta</Text>
         </View>
      
+
+        <Pressable onPress={()=>navigation.navigate("UserProfile")} style={{justifyContent:"center"}}>
      
         <View style={{marginTop: 10,flexDirection:"row",padding:2}}>
          <View style={{padding:5}}>
@@ -101,19 +103,29 @@ function ProfileSetting({navigation}) {
          <View>
          <Text style={{color:"white",fontSize:20,padding:3}}>Accounts Center</Text>
          <Text style={Styles.text}>Password,Security,Personal details,
-            ad prefences</Text>
+          ad prefences</Text>
          {/* <Text></Text> */}
 
          </View>
-         <TouchableOpacity onPress={()=>navigation.navigate("UserProfile")} style={{justifyContent:"center"}}>
- <Icon3 name="arrow-right" size={20}  color={'#575555'} />
-         </TouchableOpacity>
+
+ {/* <Icon3 name="arrow-right" size={20}  color={'#575555'} /> */}
         </View>
         <View style={{padding:13}}>
             <Text style={Styles.text}>Manage your connected experiences and account
                 settings accross Meta technologies.
             </Text>
         </View>
+         </Pressable>
+
+
+
+
+
+
+
+
+
+
         <View>
             <View style={{color:"gray",borderWidth:3,borderRadius:6,borderColor:"#2d2d2d"}}></View>
         </View>

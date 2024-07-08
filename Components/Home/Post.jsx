@@ -71,9 +71,9 @@ const handleFollow = post => {
 
 
   return (
-    <View style={{marginBottom: 30}}>
+    <View style={{marginBottom: 30,marginTop:20}}>
       {/* <Divider width={1} orientation="vertical" /> */}
-      <PostHeader post={post} handleFollow={handleFollow} />
+      <PostHeader post={post} />
       <PostImage post={post} />
       <View style={{marginHorizontal: 15, marginTop: 10}}>
         <FooterIcons post={post} openComments={openComments} handleLike={handleLike} />
@@ -94,7 +94,7 @@ const handleFollow = post => {
   );
 }
 
-const PostHeader = ({post,handleFollow}) => {
+const PostHeader = ({post}) => {
   return (
     <View
       style={{
@@ -110,15 +110,16 @@ const PostHeader = ({post,handleFollow}) => {
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'space-between',alignItems:"center"}}>
       {/* <TouchableOpacity > */}
-          {post.followers.includes(auth().currentUser.email) ? (
-           <TouchableOpacity style={styles.button} onPress={()=>handleFollow()}>
-           <Text style={{color: 'black', fontWeight: 500}}>Following</Text>
-         </TouchableOpacity>
-         ) : (
-          <Pressable style={styles.button} onPress={()=>handleFollow()}>
-          <Text style={{color: 'black', fontWeight: 500}}>Follow</Text>
+          {/* {post.followers.includes(auth().currentUser.email) ? ( */}
+           {/* <TouchableOpacity style={styles.button} onPress={()=>handleFollow()}> */}
+           {/* <Text style={{color: 'black', fontWeight: 500}}>Following</Text> */}
+         {/* </TouchableOpacity> */}
+         {/* ) : ( */}
+          <Pressable style={styles.button}>
+          <Text style={{color: 'white', fontWeight: 500}}>Follow</Text>
+          {/* <Text style={{color: 'black', fontWeight: 500}}>Follow</Text> */}
         </Pressable>
-          )}
+          {/* )} */}
         {/* </TouchableOpacity> */}
 
        
@@ -287,12 +288,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: 'white',
-    minHeight: 25,
+    marginRight:10,
+    backgroundColor: '#2d2d2d',
+    minHeight: 37,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    width: 80,
+    width: 90,
   },
 });
 

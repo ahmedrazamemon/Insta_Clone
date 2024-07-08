@@ -12,6 +12,7 @@ import Posts from '../Components/Home/Post';
 import firestore from '@react-native-firebase/firestore';
 import Loader from '../Components/Loader';
 import Cards from '../Components/Profile/Cards';
+import { Divider } from 'react-native-elements';
 // import BottomNavigation from './BottomNavigation';
 function HomeScreen({navigation}) {
   const [postData, setpostData] = useState([]);
@@ -28,6 +29,7 @@ function HomeScreen({navigation}) {
       <Header navigation={navigation} />
       <ScrollView>
       <Stories />
+      <Divider width={0.3}/>
         {
         postData.length==0?<Loader size={"large"} color={"#FFF"} style={style.loader}/>:
         postData.map((post, index) => (

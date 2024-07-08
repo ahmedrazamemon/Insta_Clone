@@ -99,7 +99,7 @@ const Footer = ({data,openComments}) => {
       <View style={styles.leftIcons}>
         <TouchableOpacity>
           <Icon
-            onPress={() => handleLike(post)}
+          
             name={iconNames[1]}
             size={27}
             color={'white'}

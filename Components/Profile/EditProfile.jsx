@@ -225,7 +225,7 @@ const Header = ({navigation, title, loading, updateUserData}) => {
         justifyContent: 'space-between',
       }}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Pressable style={{marginTop: 5}} onPress={() => navigation.goBack()}>
+        <Pressable style={{marginTop: 5,width:50,padding:5}} onPress={() => navigation.goBack()}>
           <Icon2 name="arrow-left-long" size={23} color={'white'} />
         </Pressable>
         <Text
@@ -290,7 +290,7 @@ const Inputfeild = ({
       <Text style={Styles.text}>Add link</Text>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         {loading ? (
-          <Loader size={'small'} color={'white'}  style={Styles.loader}/>
+          <Loader size={'small'} color={'white'} style={Styles.loader} />
         ) : (
           <StandardButton
             onPress={updateUserData}

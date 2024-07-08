@@ -93,7 +93,6 @@ const CommentsModal = ({ visible, onClose, post }) => {
               width: '100%',
             }}>
             <Text style={styles.modalTitle}>Add your comment</Text>
-            <StandardButton title={'X'} onPress={()=>onClose()} style={styles.button} />
           </View>
           <ScrollView style={{ marginVertical: 20, width: '100%' }}>
             {postComment.map((item, index) => (
@@ -170,10 +169,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   commentText: {
-width:300,
+// width:300,
     color: 'white',
     flexDirection:"row",
-    justifyContent:"space-between"
+    // justifyContent:"space-between"
   },
   button: {
     backgroundColor: '#6AA0F5',

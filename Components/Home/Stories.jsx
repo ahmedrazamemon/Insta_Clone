@@ -18,8 +18,9 @@ function Stories() {
         );
       });
   },[])
+  const imageLoader = 'https://loading.io/assets/mod/spinner/spinner/lg.gif'
   return (
-    <View>
+    <View style={{padding:10}}>
    
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={{flexDirection:"column",alignItems:"center",justifyContent:"center",marginBottom:9}}>
@@ -34,7 +35,7 @@ function Stories() {
         </View>
         {userslist.map((value,index) => (
           <View key={index} style={{alignItems:"center"}}>
-            <ImageComponent source={{uri:value.profilePicture}} style={style.image} />
+            <ImageComponent source={{uri:value.profilePicture?value.profilePicture:imageLoader}} style={style.image} />
             <Text style={{color:"white",textAlign:"center",marginBottom:9,marginLeft:10}}>
                 {value.username.length>6?value.username.slice(0,5).toLowerCase()+'..'
                 :value.username.toLowerCase()
